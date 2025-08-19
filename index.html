@@ -33,7 +33,7 @@
     }
 
     h1 {
-      font-size: 7rem; /* Bigger $PBA text */
+      font-size: 7rem;
       margin-bottom: 0.5rem;
       letter-spacing: .1em;
       animation: flicker 2s infinite alternate;
@@ -45,12 +45,8 @@
     }
 
     @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        text-shadow: 0 0 4px #0f0, 0 0 20px #0f0;
-      }
-      20%, 24%, 55% {
-        text-shadow: none;
-      }
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 4px #0f0, 0 0 20px #0f0; }
+      20%, 24%, 55% { text-shadow: none; }
     }
 
     p.tagline {
@@ -58,10 +54,9 @@
       margin-bottom: 2rem;
       opacity: 0.9;
       line-height: 1.5;
-      min-height: 3rem; /* space reserved for typewriter */
+      min-height: 3rem;
     }
 
-    /* Neon animated borders for image boxes */
     .image-boxes {
       display: flex;
       gap: 2rem;
@@ -123,7 +118,6 @@
       text-align: center;
     }
 
-    /* Glowing cursor */
     .cursor {
       width: 20px;
       height: 20px;
@@ -136,16 +130,33 @@
       box-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
       transition: transform 0.1s ease;
     }
+
+    #audioToggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1.2rem;
+      border: 2px solid #0f0;
+      background: transparent;
+      color: #0f0;
+      cursor: pointer;
+      z-index: 999;
+      transition: 0.3s;
+    }
+    #audioToggle:hover {
+      box-shadow: 0 0 15px #0f0, 0 0 25px #0f0;
+      background-color: #0f0;
+      color: #000;
+    }
   </style>
 </head>
 <body>
-  <!-- Background video -->
   <video class="bg-video" autoplay loop muted playsinline id="bgvid">
     <source src="background.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 
-  <!-- Custom cursor -->
   <div class="cursor" id="cursor"></div>
 
   <h1>$PBA</h1>
@@ -153,7 +164,6 @@
 
   <p class="tagline" id="typewriter"></p>
 
-  <!-- Four image boxes side by side -->
   <div class="image-boxes">
     <img src="first.jpg" alt="First">
     <img src="second.jpg" alt="Second">
@@ -167,11 +177,13 @@
     <a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
   </div>
 
+  <button id="audioToggle">Mute</button>
+
   <footer>Everything starts with belief...</footer>
 
   <script>
     // Typewriter effect
-    const text = "world's greatest psycho-financial experiment";
+    const text = "World’s Greatest Psycho-Financial Experiment";
     let i = 0;
     function typeWriter() {
       if (i < text.length) {
@@ -189,13 +201,24 @@
       cursor.style.top = e.clientY + "px";
     });
 
-    // Video sound toggle on click
+    // Video sound toggle
     const video = document.getElementById("bgvid");
-    document.body.addEventListener("click", () => {
-      if (video.muted) {
+    const audioBtn = document.getElementById("audioToggle");
+    audioBtn.addEventListener("click", () => {
+      if(video.muted){
         video.muted = false;
         video.volume = 0.5;
+        audioBtn.innerText = "Mute";
+      } else {
+        video.muted = true;
+        audioBtn.innerText = "Unmute";
       }
+    });
+
+    // Enable sound on first click anywhere
+    document.body.addEventListener("click", () => {
+      video.muted = false;
+      video.volume = 0.5;
     }, { once: true });
   </script>
 </body>
