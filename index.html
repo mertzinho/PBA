@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>$PBA – Psycho-Financial Experiment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Courier New', monospace;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #0f0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background video */
+    video.bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: .1em;
+      animation: flicker 2s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 2px #0f0, 0 0 10px #0f0;
+      }
+      20%, 24%, 55% {
+        text-shadow: none;
+      }
+    }
+
+    p.tagline {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .links a {
+      color: #0f0;
+      text-decoration: none;
+      border: 1px solid #0f0;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      transition: background-color .2s, color .2s;
+    }
+
+    .links a:hover {
+      background-color: #0f0;
+      color: #000;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 1rem;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background video (replace src with your own video) -->
+  <video class="bg-video" autoplay loop muted playsinline id="bgvid">
+    <source src="your-video.mp4" type="video/mp4">
+    Your browser does not support video.
+  </video>
+
+  <h1>$PBA</h1>
+  <p class="tagline">
+    world's greatest psycho-financial experiment <br>
+    Because everything starts with belief... <br>
+    Powered by Solana Blockchain
+  </p>
+
+  <div class="links">
+    <a href="https://x.com">X Community</a>
+    <a href="https://x.com">X Account</a>
+    <a href="https://dexscreener.com">Chart</a>
+    <a href="https://coinmarketcap.com">CoinMarketCap</a>
+    <a href="https://jup.ag">Buy on JUP.ag (SOL)</a>
+    <a href="https://app.uniswap.org">Buy on Uniswap (ETH)</a>
+  </div>
+
+  <footer>made for unstable people. get rich or die trying.</footer>
+
+  <script>
+    // Unmute video after user interaction (browser policy requires it)
+    const video = document.getElementById("bgvid");
+    document.body.addEventListener("click", () => {
+      video.muted = false;
+      video.volume = 0.5; // set volume (0.0 to 1.0)
+    }, { once: true });
+  </script>
+</body>
+</html>
