@@ -83,22 +83,6 @@
       100% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
     }
 
-    /* Enlarge image when clicked */
-    .image-boxes img.enlarged {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 80vw;
-      height: auto;
-      max-height: 90vh;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-      box-shadow: 0 0 50px #0f0, 0 0 100px #0f0;
-      transition: all 0.4s ease;
-      cursor: zoom-out;
-    }
-
-    /* Text under images */
     #cryptoAddress {
       font-size: 2rem;
       margin-top: 1.5rem;
@@ -166,6 +150,56 @@
       50% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0; }
       100% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
     }
+
+    /* Modal styling */
+    .enlarged {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 80vw;
+      height: auto;
+      max-height: 90vh;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      box-shadow: 0 0 50px #0f0, 0 0 100px #0f0;
+      transition: all 0.4s ease;
+      cursor: zoom-out;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 5%;
+      right: 5%;
+      padding: 0.5rem 1rem;
+      font-size: 1.5rem;
+      border: 2px solid #0f0;
+      background: transparent;
+      color: #0f0;
+      z-index: 1001;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .close-btn:hover {
+      background-color: #0f0;
+      color: #000;
+      box-shadow: 0 0 25px #0f0;
+    }
+
+    /* Logo drop */
+    .drop-logo {
+      position: fixed;
+      width: 60px;
+      pointer-events: none;
+      animation: drop 1s linear forwards;
+      z-index: 999;
+    }
+
+    @keyframes drop {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
   </style>
 </head>
 <body>
@@ -197,10 +231,10 @@
   </div>
 
   <button id="audioToggle">Mute</button>
-
   <footer>Everything starts with belief...</footer>
 
   <script>
+    // Typewriter
     const text = "World’s Greatest Psycho-Financial Experiment";
     let i = 0;
     function typeWriter() {
@@ -212,12 +246,14 @@
     }
     window.onload = typeWriter;
 
+    // Cursor
     const cursor = document.getElementById("cursor");
     document.addEventListener("mousemove", e => {
       cursor.style.left = e.clientX + "px";
       cursor.style.top = e.clientY + "px";
     });
 
+    // Video audio toggle
     const video = document.getElementById("bgvid");
     const audioBtn = document.getElementById("audioToggle");
     audioBtn.addEventListener("click", () => {
@@ -236,17 +272,53 @@
       video.volume = 0.5;
     }, { once: true });
 
-    // Enlarge image on click
+    // Image modal
     const images = document.querySelectorAll(".image-boxes img");
+    let closeBtn = null;
+
     images.forEach(img => {
-      img.addEventListener("click", () => {
+      img.addEventListener("click", e => {
+        e.stopPropagation();
         if(img.classList.contains("enlarged")){
-          img.classList.remove("enlarged");
+          closeImage();
         } else {
           images.forEach(i => i.classList.remove("enlarged"));
           img.classList.add("enlarged");
+
+          // Add close button
+          if(!closeBtn){
+            closeBtn = document.createElement("button");
+            closeBtn.innerText = "X";
+            closeBtn.className = "close-btn";
+            document.body.appendChild(closeBtn);
+            closeBtn.addEventListener("click", closeImage);
+          }
         }
       });
+    });
+
+    function closeImage() {
+      images.forEach(i => i.classList.remove("enlarged"));
+      if(closeBtn) {
+        closeBtn.remove();
+        closeBtn = null;
+      }
+    }
+
+    document.addEventListener("click", (e) => {
+      if(!e.target.classList.contains("enlarged")){
+        closeImage();
+      }
+    });
+
+    // Logo drop
+    document.addEventListener("click", e => {
+      const logo = document.createElement("img");
+      logo.src = "drop.png";
+      logo.className = "drop-logo";
+      logo.style.left = (e.clientX - 30) + "px"; // center logo
+      document.body.appendChild(logo);
+      setTimeout(() => logo.remove(), 1000);
     });
   </script>
 </body>
