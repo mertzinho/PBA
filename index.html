@@ -18,10 +18,9 @@
       color: #0f0;
       overflow: hidden;
       position: relative;
-      cursor: none; /* hide default cursor */
+      cursor: none;
     }
 
-    /* Background video */
     video.bg-video {
       position: fixed;
       right: 0;
@@ -39,10 +38,7 @@
       animation: flicker 2s infinite alternate;
     }
 
-    h2.subtitle {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
+    h2.subtitle { font-size: 2.5rem; margin-bottom: 1.5rem; }
 
     @keyframes flicker {
       0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 4px #0f0, 0 0 20px #0f0; }
@@ -86,13 +82,7 @@
       100% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
     }
 
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
+    .links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem; }
 
     .links a {
       color: #0f0;
@@ -109,14 +99,7 @@
       box-shadow: 0 0 15px #0f0;
     }
 
-    footer {
-      position: absolute;
-      bottom: 1rem;
-      font-size: 1.2rem;
-      opacity: 0.8;
-      width: 100%;
-      text-align: center;
-    }
+    footer { position: absolute; bottom: 1rem; font-size: 1.2rem; opacity: 0.8; width: 100%; text-align: center; }
 
     .cursor {
       width: 20px;
@@ -129,6 +112,7 @@
       z-index: 999;
       box-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
       transition: transform 0.1s ease;
+      animation: glow 2s infinite alternate;
     }
 
     #audioToggle {
@@ -142,12 +126,20 @@
       color: #0f0;
       cursor: pointer;
       z-index: 999;
+      animation: glow 2s infinite alternate;
       transition: 0.3s;
     }
+
     #audioToggle:hover {
-      box-shadow: 0 0 15px #0f0, 0 0 25px #0f0;
       background-color: #0f0;
       color: #000;
+      box-shadow: 0 0 25px #0f0, 0 0 50px #0f0;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
+      50% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0; }
+      100% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
     }
   </style>
 </head>
@@ -182,7 +174,6 @@
   <footer>Everything starts with belief...</footer>
 
   <script>
-    // Typewriter effect
     const text = "World’s Greatest Psycho-Financial Experiment";
     let i = 0;
     function typeWriter() {
@@ -194,14 +185,12 @@
     }
     window.onload = typeWriter;
 
-    // Custom glowing cursor
     const cursor = document.getElementById("cursor");
     document.addEventListener("mousemove", e => {
       cursor.style.left = e.clientX + "px";
       cursor.style.top = e.clientY + "px";
     });
 
-    // Video sound toggle
     const video = document.getElementById("bgvid");
     const audioBtn = document.getElementById("audioToggle");
     audioBtn.addEventListener("click", () => {
@@ -215,7 +204,6 @@
       }
     });
 
-    // Enable sound on first click anywhere
     document.body.addEventListener("click", () => {
       video.muted = false;
       video.volume = 0.5;
