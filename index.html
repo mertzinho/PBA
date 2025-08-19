@@ -18,6 +18,7 @@
       color: #0f0;
       overflow: hidden;
       position: relative;
+      cursor: none; /* hide default cursor */
     }
 
     /* Background video */
@@ -27,21 +28,20 @@
       bottom: 0;
       min-width: 100%;
       min-height: 100%;
-      z-index: -1;
+      z-index: -2;
       object-fit: cover;
     }
 
     h1 {
-      font-size: 8rem; /* much bigger */
+      font-size: 7rem; /* Bigger $PBA text */
       margin-bottom: 0.5rem;
-      letter-spacing: .15em;
+      letter-spacing: .1em;
       animation: flicker 2s infinite alternate;
     }
 
     h2.subtitle {
-      font-size: 3rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
     }
 
     @keyframes flicker {
@@ -55,54 +55,63 @@
 
     p.tagline {
       font-size: 2rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       opacity: 0.9;
-      line-height: 1.8;
+      line-height: 1.5;
+      min-height: 3rem; /* space reserved for typewriter */
     }
 
-    /* Container for four images */
+    /* Neon animated borders for image boxes */
     .image-boxes {
       display: flex;
       gap: 2rem;
       justify-content: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       flex-wrap: wrap;
     }
 
     .image-boxes img {
-      width: 280px;
-      height: 200px;
+      width: 300px;
+      height: 220px;
       object-fit: cover;
       border: 3px solid #0f0;
+      box-shadow: 0 0 15px #0f0;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: neonBorder 2s linear infinite;
     }
 
     .image-boxes img:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       box-shadow: 0 0 25px #0f0, 0 0 50px #0f0;
+    }
+
+    @keyframes neonBorder {
+      0% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
+      50% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0; }
+      100% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
     }
 
     .links {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1rem;
       justify-content: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     .links a {
       color: #0f0;
       text-decoration: none;
       border: 2px solid #0f0;
-      padding: 1rem 2rem;
+      padding: 0.8rem 1.5rem;
       font-size: 1.5rem;
-      transition: background-color .2s, color .2s, transform .2s;
+      transition: background-color .2s, color .2s, box-shadow .2s;
     }
 
     .links a:hover {
       background-color: #0f0;
       color: #000;
-      transform: scale(1.05);
+      box-shadow: 0 0 15px #0f0;
     }
 
     footer {
@@ -114,25 +123,18 @@
       text-align: center;
     }
 
-    /* Mute button */
-    #mute-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: transparent;
+    /* Glowing cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
       border: 2px solid #0f0;
-      color: #0f0;
-      padding: 0.7rem 1.5rem;
-      cursor: pointer;
-      font-size: 1.2rem;
-      font-family: 'Courier New', monospace;
-      transition: background-color .2s, color .2s, transform .2s;
-    }
-
-    #mute-btn:hover {
-      background-color: #0f0;
-      color: #000;
-      transform: scale(1.1);
+      border-radius: 50%;
+      position: fixed;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 999;
+      box-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+      transition: transform 0.1s ease;
     }
   </style>
 </head>
@@ -143,16 +145,15 @@
     Your browser does not support video.
   </video>
 
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+
   <h1>$PBA</h1>
   <h2 class="subtitle">Pure Belief Assets</h2>
 
-  <p class="tagline">
-    world's greatest psycho-financial experiment <br>
-    Because everything starts with belief... <br>
-    Powered by Solana Blockchain
-  </p>
+  <p class="tagline" id="typewriter"></p>
 
-  <!-- Four image boxes -->
+  <!-- Four image boxes side by side -->
   <div class="image-boxes">
     <img src="first.jpg" alt="First">
     <img src="second.jpg" alt="Second">
@@ -168,21 +169,34 @@
 
   <footer>Everything starts with belief...</footer>
 
-  <!-- Mute/Unmute Button -->
-  <button id="mute-btn">Unmute</button>
-
   <script>
-    const video = document.getElementById("bgvid");
-    const muteBtn = document.getElementById("mute-btn");
+    // Typewriter effect
+    const text = "world's greatest psycho-financial experiment";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 70);
+      }
+    }
+    window.onload = typeWriter;
 
-    // Start muted
-    video.muted = true;
-    video.volume = 0.5;
-
-    muteBtn.addEventListener("click", () => {
-      video.muted = !video.muted;
-      muteBtn.textContent = video.muted ? "Unmute" : "Mute";
+    // Custom glowing cursor
+    const cursor = document.getElementById("cursor");
+    document.addEventListener("mousemove", e => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
     });
+
+    // Video sound toggle on click
+    const video = document.getElementById("bgvid");
+    document.body.addEventListener("click", () => {
+      if (video.muted) {
+        video.muted = false;
+        video.volume = 0.5;
+      }
+    }, { once: true });
   </script>
 </body>
 </html>
