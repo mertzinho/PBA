@@ -69,6 +69,7 @@
       box-shadow: 0 0 15px #0f0;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       animation: neonBorder 2s linear infinite;
+      cursor: pointer;
     }
 
     .image-boxes img:hover {
@@ -80,6 +81,30 @@
       0% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
       50% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0; }
       100% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
+    }
+
+    /* Enlarge image when clicked */
+    .image-boxes img.enlarged {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 80vw;
+      height: auto;
+      max-height: 90vh;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      box-shadow: 0 0 50px #0f0, 0 0 100px #0f0;
+      transition: all 0.4s ease;
+      cursor: zoom-out;
+    }
+
+    /* Text under images */
+    #cryptoAddress {
+      font-size: 2rem;
+      margin-top: 1.5rem;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      font-family: 'Courier New', monospace;
     }
 
     .links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem; }
@@ -163,6 +188,8 @@
     <img src="fourth.jpeg" alt="Fourth">
   </div>
 
+  <div id="cryptoAddress">CA: 5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump</div>
+
   <div class="links">
     <a href="https://x.com/i/communities/1957015238290579938" target="_blank">X Community</a>
     <a href="https://x.com/PBAOnSol" target="_blank">X Account</a>
@@ -208,6 +235,19 @@
       video.muted = false;
       video.volume = 0.5;
     }, { once: true });
+
+    // Enlarge image on click
+    const images = document.querySelectorAll(".image-boxes img");
+    images.forEach(img => {
+      img.addEventListener("click", () => {
+        if(img.classList.contains("enlarged")){
+          img.classList.remove("enlarged");
+        } else {
+          images.forEach(i => i.classList.remove("enlarged"));
+          img.classList.add("enlarged");
+        }
+      });
+    });
   </script>
 </body>
 </html>
