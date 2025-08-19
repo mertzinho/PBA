@@ -1,14 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>$PBA – Psycho-Financial Experiment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts: Bebas Neue -->
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Courier New', monospace; /* fallback */
+      font-family: 'Courier New', monospace;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -20,20 +20,28 @@
       position: relative;
     }
 
+    /* Background video */
+    video.bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
     h1 {
-      font-family: 'Bebas Neue', cursive; /* change font */
-      font-size: 5rem; 
+      font-size: 5rem; /* Bigger $PBA text */
       margin-bottom: 0.3rem;
       letter-spacing: .1em;
       animation: flicker 2s infinite alternate;
     }
 
     h2.subtitle {
-      font-family: 'Bebas Neue', cursive;
       font-size: 2rem;
       margin-bottom: 1.5rem;
-      letter-spacing: .1em;
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     @keyframes flicker {
@@ -52,17 +60,63 @@
       line-height: 1.5;
     }
 
-    /* ... rest of your CSS remains the same ... */
+    /* Container for the two images */
+    .image-boxes {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .image-boxes img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      border: 2px solid #0f0;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .links a {
+      color: #0f0;
+      text-decoration: none;
+      border: 1px solid #0f0;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      transition: background-color .2s, color .2s;
+    }
+
+    .links a:hover {
+      background-color: #0f0;
+      color: #000;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 1rem;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      width: 100%;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
+  <!-- Background video -->
   <video class="bg-video" autoplay loop muted playsinline id="bgvid">
     <source src="background.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 
   <h1>$PBA</h1>
-  <h2 class="subtitle">Pure Belief Assets</h2> <!-- New subtitle -->
+  <h2 class="subtitle">Pure Belief Assets</h2>
 
   <p class="tagline">
     world's greatest psycho-financial experiment <br>
@@ -70,5 +124,26 @@
     Powered by Solana Blockchain
   </p>
 
-  <!-- ... rest of your body remains the same ... -->
+  <!-- Two image boxes side by side -->
+  <div class="image-boxes">
+    <img src="image1.jpg" alt="Image 1">
+    <img src="image2.jpg" alt="Image 2">
+  </div>
+
+  <div class="links">
+    <a href="https://x.com/i/communities/1957015238290579938" target="_blank">X Community</a>
+    <a href="https://x.com/PBAOnSol" target="_blank">X Account</a>
+    <a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
+  </div>
+
+  <footer>Everything starts with belief...</footer>
+
+  <script>
+    const video = document.getElementById("bgvid");
+    document.body.addEventListener("click", () => {
+      video.muted = false;
+      video.volume = 0.5;
+    }, { once: true });
+  </script>
 </body>
+</html>
