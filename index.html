@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -32,7 +32,7 @@
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 5rem; /* Bigger $PBA text */
       margin-bottom: 1rem;
       letter-spacing: .1em;
       animation: flicker 2s infinite alternate;
@@ -48,10 +48,26 @@
     }
 
     p.tagline {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-bottom: 2rem;
       opacity: 0.9;
       line-height: 1.5;
+    }
+
+    /* Container for the two images */
+    .image-boxes {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .image-boxes img {
+      width: 200px; /* adjust size as needed */
+      height: 150px;
+      object-fit: cover;
+      border: 2px solid #0f0;
     }
 
     .links {
@@ -94,11 +110,18 @@
   </video>
 
   <h1>$PBA</h1>
+
   <p class="tagline">
     world's greatest psycho-financial experiment <br>
     Because everything starts with belief... <br>
     Powered by Solana Blockchain
   </p>
+
+  <!-- Two image boxes side by side -->
+  <div class="image-boxes">
+    <img src="image1.jpg" alt="Image 1">
+    <img src="image2.jpg" alt="Image 2">
+  </div>
 
   <div class="links">
     <a href="https://x.com">X Community</a>
@@ -112,12 +135,12 @@
   <footer>made for unstable people. get rich or die trying.</footer>
 
   <script>
-    // Unmute video after user interaction (browser policy requires it)
     const video = document.getElementById("bgvid");
     document.body.addEventListener("click", () => {
       video.muted = false;
-      video.volume = 0.5; // set volume (0.0 to 1.0)
+      video.volume = 0.5;
     }, { once: true });
   </script>
 </body>
 </html>
+
