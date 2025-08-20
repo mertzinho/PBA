@@ -9,11 +9,9 @@
 
     body {
       font-family: 'Courier New', monospace;
-      height: 100vh;
-      text-align: center;
+      background: black;
       color: #0f0;
       overflow-x: hidden;
-      background: black;
       position: relative;
     }
 
@@ -37,15 +35,9 @@
       margin-bottom: 2rem;
     }
 
-    #introScreen h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
+    #introScreen h2 { font-size: 2rem; margin-bottom: 1.5rem; }
 
-    .intro-buttons {
-      display: flex;
-      gap: 2rem;
-    }
+    .intro-buttons { display: flex; gap: 2rem; }
 
     .intro-buttons button {
       padding: 1rem 2rem;
@@ -56,39 +48,41 @@
       transition: all 0.2s;
     }
 
-    .yes-btn {
-      background: black;
-      border: 2px solid #0f0;
-      color: #0f0;
-    }
+    .yes-btn { background: black; border: 2px solid #0f0; color: #0f0; }
     .yes-btn:hover { background: #0f0; color: black; }
 
-    .no-btn {
-      background: black;
-      border: 2px solid red;
-      color: red;
-    }
+    .no-btn { background: black; border: 2px solid red; color: red; }
     .no-btn:hover { background: red; color: white; }
 
     /* Background video */
     video.bg-video {
       position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100%;
-      min-height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -2;
       object-fit: cover;
     }
 
-    h1 {
-      font-size: 7rem;
-      margin-bottom: 0.5rem;
-      letter-spacing: .1em;
-      animation: flicker 2s infinite alternate;
+    /* Hero section wrapper */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
 
-    h2.subtitle { font-size: 2.5rem; margin-bottom: 1.5rem; }
+    h1 {
+      font-size: 6vw;
+      letter-spacing: .1em;
+      animation: flicker 2s infinite alternate;
+      margin-bottom: 0.5rem;
+    }
+
+    h2.subtitle { font-size: 2vw; margin-bottom: 1.5rem; }
 
     @keyframes flicker {
       0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
@@ -98,7 +92,7 @@
     }
 
     p.tagline {
-      font-size: 2rem;
+      font-size: 1.2vw;
       margin-bottom: 2rem;
       opacity: 0.9;
       line-height: 1.5;
@@ -107,15 +101,15 @@
 
     .image-boxes {
       display: flex;
-      gap: 2rem;
+      gap: 1rem;
       justify-content: center;
       margin-bottom: 2rem;
       flex-wrap: wrap;
     }
 
     .image-boxes img {
-      width: 350px;
-      height: 260px;
+      width: 20vw;
+      height: 15vw;
       object-fit: cover;
       border: 3px solid #0f0;
       box-shadow: 0 0 15px #0f0;
@@ -148,14 +142,18 @@
       text-decoration: none;
       border: 2px solid #0f0;
       padding: 0.8rem 1.5rem;
-      font-size: 1.5rem;
+      font-size: 1.2vw;
       transition: background-color .2s, color .2s, box-shadow .2s;
     }
-    .links a:hover { background-color: #0f0; color: #000; box-shadow: 0 0 15px #0f0; }
 
-    /* Contract Address */
+    .links a:hover {
+      background-color: #0f0;
+      color: #000;
+      box-shadow: 0 0 15px #0f0;
+    }
+
     .ca {
-      font-size: 1.2rem;
+      font-size: 1vw;
       margin-bottom: 2rem;
       color: #0f0;
       word-break: break-all;
@@ -164,14 +162,13 @@
     footer {
       position: relative;
       bottom: 1rem;
-      font-size: 1.2rem;
+      font-size: 1vw;
       opacity: 0.8;
       width: 100%;
       text-align: center;
       margin-top: 2rem;
     }
 
-    /* Cursor */
     .cursor {
       width: 20px;
       height: 20px;
@@ -225,33 +222,17 @@
       cursor: pointer;
     }
 
-    /* Vision section like Pure Belief Assets */
+    /* Vision section */
     #vision {
       padding: 6rem 1rem;
       background: black;
       color: #0f0;
     }
-    #vision h2 {
-      font-size: 3rem;
-      margin-bottom: 3rem;
-      text-shadow: 0 0 15px #0f0;
-    }
-    .vision-box {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 2rem;
-      border: 2px solid #0f0;
-      box-shadow: 0 0 15px #0f0;
-      background: rgba(0,0,0,0.7);
-      text-align: left;
-    }
+    #vision h2 { font-size: 3rem; margin-bottom: 3rem; text-shadow: 0 0 15px #0f0; }
+    .vision-box { max-width: 800px; margin: 2rem auto; padding: 2rem; border: 2px solid #0f0; box-shadow: 0 0 15px #0f0; background: rgba(0,0,0,0.7); text-align: left; }
     .vision-box h3 { font-size: 2rem; margin-bottom: 1rem; }
     .vision-box p { font-size: 1.2rem; line-height: 1.6; }
-    .vision-center {
-      max-width: 800px;
-      margin: 4rem auto 0;
-      text-align: center;
-    }
+    .vision-center { max-width: 800px; margin: 4rem auto 0; text-align: center; }
     .vision-center h2 { font-size: 2.5rem; margin-bottom: 1rem; }
     .vision-center p { margin: 1rem 0; font-size: 1.2rem; }
   </style>
@@ -275,152 +256,4 @@
   </video>
 
   <!-- Cursor -->
-  <div class="cursor" id="cursor"></div>
-
-  <h1>$PBA</h1>
-  <h2 class="subtitle">Pure Belief Assets</h2>
-  <p class="tagline" id="typewriter"></p>
-
-  <div class="image-boxes">
-    <img src="first.jpg" alt="First">
-    <img src="second.jpg" alt="Second">
-    <img src="third.jpg" alt="Third">
-    <img src="fourth.jpeg" alt="Fourth">
-  </div>
-
-  <div class="links">
-    <a href="https://x.com/i/communities/1957015238290579938" target="_blank">X Community</a>
-    <a href="https://x.com/PBAOnSol" target="_blank">X Account</a>
-    <a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
-  </div>
-
-  <div class="ca">CA: 94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds</div>
-
-  <button id="audioToggle">Mute</button>
-
-  <!-- Enlarged image -->
-  <div id="enlargedImage">
-    <img src="" alt="Enlarged">
-    <button id="closeImageBtn">✖</button>
-  </div>
-
-  <!-- Vision -->
-  <section id="vision">
-    <h2>The Vision</h2>
-
-    <div class="vision-box">
-      <h3>Beyond Markets</h3>
-      <p>$PBA transcends traditional market dynamics. We're not just an asset – we're a testament to the power of collective belief.</p>
-    </div>
-
-    <div class="vision-box">
-      <h3>Pure Conviction</h3>
-      <p>When markets are driven by fear, we stand united in our conviction. Our strength lies in our unwavering belief.</p>
-    </div>
-
-    <div class="vision-box">
-      <h3>Community First</h3>
-      <p>Every believer is a cornerstone of our movement. Together, we're building something bigger than ourselves.</p>
-    </div>
-
-    <div class="vision-center">
-      <h2>The Movement</h2>
-      <p><strong>We Are The Believers</strong></p>
-      <p><em>In a world of skeptics, we dare to believe. Our conviction is our strength, our unity is our power.</em></p>
-      <p><strong>We Are The Future</strong></p>
-      <p><em>$PBA represents more than gains – it's a revolution in how we perceive value. Through pure belief, we create our reality.</em></p>
-      <p><strong>We Are One</strong></p>
-      <p><em>Every holder is a believer. Every believer is a builder. Together, we're unstoppable.</em></p>
-    </div>
-  </section>
-
-  <footer>Everything starts with belief...</footer>
-
-  <script>
-    // Typewriter
-    const text = "World's greatest psycho-financial experiment";
-    let i = 0;
-    function typeWriter() {
-      if (i < text.length) {
-        document.getElementById("typewriter").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 70);
-      }
-    }
-    window.onload = typeWriter;
-
-    // Cursor
-    const cursor = document.getElementById("cursor");
-    document.addEventListener("mousemove", e => {
-      cursor.style.left = e.clientX + "px";
-      cursor.style.top = e.clientY + "px";
-    });
-
-    // Video sound toggle
-    const video = document.getElementById("bgvid");
-    const audioToggle = document.getElementById("audioToggle");
-    audioToggle.addEventListener("click", () => {
-      video.muted = !video.muted;
-      audioToggle.innerText = video.muted ? "Unmute" : "Mute";
-    });
-
-    // Image enlarge
-    const images = document.querySelectorAll(".image-boxes img");
-    const enlargedImage = document.getElementById("enlargedImage");
-    const enlargedImgTag = enlargedImage.querySelector("img");
-    const closeImageBtn = document.getElementById("closeImageBtn");
-
-    images.forEach(img => {
-      img.addEventListener("click", () => {
-        enlargedImgTag.src = img.src;
-        enlargedImage.style.display = "flex";
-      });
-    });
-    closeImageBtn.addEventListener("click", () => {
-      enlargedImage.style.display = "none";
-    });
-
-    // Drop effect
-    document.body.addEventListener("click", () => {
-      const dropsCount = Math.floor(Math.random() * 2) + 3;
-      for (let i = 0; i < dropsCount; i++) {
-        const drop = document.createElement("img");
-        drop.src = "drop.png";
-        drop.style.position = "fixed";
-        drop.style.top = "-50px";
-        drop.style.left = Math.random() * (window.innerWidth - 50) + "px";
-        drop.style.width = "50px";
-        drop.style.height = "50px";
-        drop.style.zIndex = 999;
-        drop.style.pointerEvents = "none";
-        drop.style.transition = "top 1s linear, transform 1s linear";
-        document.body.appendChild(drop);
-
-        requestAnimationFrame(() => {
-          drop.style.top = window.innerHeight + "px";
-          drop.style.transform = `rotate(${Math.random() * 360}deg)`;
-        });
-
-        setTimeout(() => drop.remove(), 1000);
-      }
-    });
-
-    // Intro screen
-    const introScreen = document.getElementById("introScreen");
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    let noClicks = 0;
-
-    yesBtn.addEventListener("click", () => {
-      introScreen.style.display = "none";
-    });
-
-    noBtn.addEventListener("click", () => {
-      noClicks++;
-      if (noClicks === 1) noBtn.innerText = "Fine! Stay Poor";
-      else if (noClicks === 2) noBtn.innerText = "Are you sure? Belief is powerful!";
-      else if (noClicks === 3) noBtn.innerText = "$PBA is the future!";
-    });
-  </script>
-</body>
-</html>
+  <div class="cursor" id="cursor
