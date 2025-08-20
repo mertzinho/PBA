@@ -50,6 +50,45 @@
     z-index: -1;
   }
 
+ <!-- Intro Screen -->
+<section id="introScreen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3000; transition:opacity 1s;">
+  <video id="introVideo" autoplay muted playsinline style="width:60%; max-width:800px; border:2px solid #0f0; box-shadow:0 0 25px #0f0; margin-bottom:2rem;">
+    <source src="intro.mp4" type="video/mp4">
+  </video>
+  <h2 style="color:#0f0; font-family:'Courier New', monospace; font-size:2.5rem; margin-bottom:2rem; text-align:center;">Are you a believer anon?</h2>
+  <div style="display:flex; gap:2rem;">
+    <button id="yesBtn" style="padding:1rem 2rem; font-size:1.5rem; font-weight:bold; background:#0f0; color:black; border:none; cursor:pointer;">YES</button>
+    <button id="noBtn" style="padding:1rem 2rem; font-size:1.5rem; font-weight:bold; background:red; color:white; border:none; cursor:pointer;">NO</button>
+  </div>
+</section>
+
+<script>
+  const introScreen = document.getElementById("introScreen");
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+
+  let noClickCount = 0;
+
+  yesBtn.addEventListener("click", () => {
+    // Fade out the intro screen
+    introScreen.style.opacity = "0";
+    setTimeout(() => {
+      introScreen.style.display = "none";
+    }, 1000); // matches CSS transition duration
+  });
+
+  noBtn.addEventListener("click", () => {
+    noClickCount++;
+    if(noClickCount === 1) {
+      noBtn.textContent = "Fine! Stay Poor";
+    } else if(noClickCount === 2) {
+      noBtn.textContent = "Are you sure? Belief is powerful!";
+    } else if(noClickCount >= 3) {
+      noBtn.textContent = "$PBA is the future!";
+    }
+  });
+</script>
+
   /* Image boxes */
   .image-boxes {
     display: flex;
