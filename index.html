@@ -1,222 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>$PBA – Psycho-Financial Experiment</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <title>$PBA – Psycho-Financial Experiment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    font-family: 'Courier New', monospace;
-    color: #0f0;
-    background: black;
-    overflow-x: hidden;
-  }
+    body {
+      font-family: 'Courier New', monospace;
+      overflow-x: hidden;
+      color: #0f0;
+      cursor: none;
+    }
 
-  section { width: 100%; }
+    /* INTRO SCREEN */
+    #introScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 10000;
+    }
 
-  /* Homepage Section */
-  #homepage {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
+    #introScreen h1 {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+    }
 
-  #homepage h1 {
-    font-size: 6rem;
-    letter-spacing: .1em;
-    margin-bottom: 0.5rem;
-    animation: flicker 2s infinite alternate;
-  }
-  #homepage h2.subtitle { font-size: 2.5rem; margin-bottom: 1rem; }
-  #homepage p.tagline { font-size: 1.8rem; margin-bottom: 2rem; }
+    .intro-btn {
+      padding: 1rem 2rem;
+      margin: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      border: 2px solid #0f0;
+      color: #0f0;
+      background: transparent;
+      transition: 0.3s;
+    }
 
-  @keyframes flicker {
-    0%,19%,21%,23%,25%,54%,56%,100% { text-shadow:0 0 4px #0f0,0 0 20px #0f0; }
-    20%,24%,55% { text-shadow:none; }
-  }
+    .intro-btn:hover { 
+      background-color: #0f0; 
+      color: #000; 
+      box-shadow: 0 0 25px #0f0; 
+    }
 
-  /* Background video */
-  #homepage video.bg-video {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
+    /* Homepage video */
+    video.bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -2;
+      object-fit: cover;
+      display: none;
+    }
 
-  /* Image boxes */
-  .image-boxes {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-  }
-  .image-boxes img {
-    width: 250px; height: 180px;
-    object-fit: cover;
-    border: 2px solid #0f0;
-    box-shadow: 0 0 15px #0f0;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .image-boxes img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px #0f0,0 0 50px #0f0;
-  }
+    /* Homepage layout */
+    #homepage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      min-height: 100vh;
+    }
 
-  /* Links */
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-  .links a {
-    color: #0f0;
-    border: 2px solid #0f0;
-    padding: 0.6rem 1.2rem;
-    text-decoration: none;
-    transition: 0.2s;
-  }
-  .links a:hover { background:#0f0; color:black; box-shadow:0 0 15px #0f0; }
+    h1.home-title { font-size: 7rem; margin-bottom: 0.5rem; letter-spacing: .1em; animation: flicker 2s infinite alternate; }
+    h2.subtitle { font-size: 2.5rem; margin-bottom: 1.5rem; }
 
-  /* Contract Address */
-  .ca { font-size: 1.2rem; margin-bottom: 1rem; word-break: break-all; }
+    @keyframes flicker {
+      0%,19%,21%,23%,25%,54%,56%,100% { text-shadow: 0 0 4px #0f0, 0 0 20px #0f0; }
+      20%,24%,55% { text-shadow: none; }
+    }
 
-  /* Vision Section */
-  #vision {
-    height: 100vh;
-    background: black;
-    color: #0f0;
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  #vision h2 { font-size: 3rem; margin-bottom: 2rem; text-shadow: 0 0 15px #0f0; }
-  .vision-box {
-    max-width: 800px;
-    margin: 1rem auto;
-    padding: 1.5rem;
-    border: 2px solid #0f0;
-    box-shadow: 0 0 15px #0f0;
-    background: rgba(0,0,0,0.7);
-    text-align: left;
-  }
-  .vision-box h3 { font-size: 2rem; margin-bottom: 0.5rem; }
-  .vision-box p { font-size: 1.1rem; line-height: 1.5; }
+    p.tagline { font-size: 2rem; margin-bottom: 2rem; opacity: 0.9; line-height: 1.5; min-height: 3rem; }
 
-  footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
+    .image-boxes { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+    .image-boxes img {
+      width: 300px; height: 220px; object-fit: cover;
+      border: 3px solid #0f0; box-shadow: 0 0 15px #0f0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      animation: neonBorder 2s linear infinite;
+    }
+    .image-boxes img:hover { transform: scale(1.05); box-shadow: 0 0 25px #0f0, 0 0 50px #0f0; }
+    @keyframes neonBorder { 0% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; } 50% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0; } 100% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; } }
+    .image-boxes img.enlarged { position: fixed; top: 50%; left: 50%; width: 80vw; height: auto; max-height: 90vh; transform: translate(-50%, -50%); z-index: 1000; box-shadow: 0 0 50px #0f0, 0 0 100px #0f0; transition: all 0.4s ease; cursor: zoom-out; }
 
-  /* Enlarged Image Modal */
-  #enlargedImage {
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: rgba(0,0,0,0.9);
-    display: none;
-    align-items:center; justify-content:center;
-    z-index:2000; flex-direction: column;
-  }
-  #enlargedImage img {
-    max-width:90%; max-height:80%;
-    border: 2px solid #0f0;
-    box-shadow:0 0 25px #0f0;
-  }
-  #closeImageBtn {
-    margin-top:1rem; background:red; color:white; border:none;
-    padding:0.5rem 1rem; font-size:1.2rem; cursor:pointer;
-  }
+    #cryptoAddress { font-size: 2rem; margin-top: 1.5rem; color: #0f0; text-shadow: 0 0 5px #0f0; font-family: 'Courier New', monospace; }
+    .links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem; }
+    .links a { color: #0f0; text-decoration: none; border: 2px solid #0f0; padding: 0.8rem 1.5rem; font-size: 1.5rem; transition: background-color .2s, color .2s, box-shadow .2s; }
+    .links a:hover { background-color: #0f0; color: #000; box-shadow: 0 0 15px #0f0; }
 
-</style>
+    footer { position: absolute; bottom: 1rem; font-size: 1.2rem; opacity: 0.8; width: 100%; text-align: center; }
+
+    .cursor { width: 20px; height: 20px; border: 2px solid #0f0; border-radius: 50%; position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 999; box-shadow: 0 0 10px #0f0, 0 0 20px #0f0; transition: transform 0.1s ease; animation: glow 2s infinite alternate; }
+
+    #audioToggle { position: fixed; top: 1rem; right: 1rem; padding: 0.8rem 1.5rem; font-size: 1.2rem; border: 2px solid #0f0; background: transparent; color: #0f0; cursor: pointer; z-index: 999; animation: glow 2s infinite alternate; transition: 0.3s; display: none; }
+    #audioToggle:hover { background-color: #0f0; color: #000; box-shadow: 0 0 25px #0f0, 0 0 50px #0f0; }
+
+    @keyframes glow { 0% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; } 50% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0; } 100% { box-shadow: 0 0 5px #0f0, 0 0 15px #0f0; } }
+
+    /* Close button */
+    #closeImageBtn { position: fixed; top: 20px; right: 20px; font-size: 2rem; padding: 0.5rem 1rem; border: 2px solid #0f0; background-color: rgba(0,0,0,0.7); color: #0f0; cursor: pointer; z-index: 1001; transition: 0.3s; display: none; }
+    #closeImageBtn:hover { background-color: #0f0; color: #000; box-shadow: 0 0 25px #0f0, 0 0 50px #0f0; }
+
+    /* Vision section */
+    #vision { background-color: #000; color: #0f0; padding: 5rem 2rem; text-align: center; min-height: 100vh; }
+    #vision h2 { font-size: 3rem; margin-bottom: 1rem; }
+    #vision p { font-size: 1.5rem; margin: 1rem 0; line-height: 1.5; }
+  </style>
 </head>
 <body>
 
-<!-- Homepage Section -->
-<section id="homepage">
-  <video class="bg-video" autoplay loop muted playsinline>
+  <!-- INTRO SCREEN -->
+  <div id="introScreen">
+    <h1>Are you a believer anon?</h1>
+    <button id="yesBtn" class="intro-btn" style="background-color:#0f0; color:#000;">Yes</button>
+    <button id="noBtn" class="intro-btn" style="background-color:#f00; color:#fff;">No</button>
+  </div>
+
+  <!-- Homepage video -->
+  <video class="bg-video" autoplay loop muted playsinline id="bgvid">
     <source src="background.mp4" type="video/mp4">
+    Your browser does not support video.
   </video>
 
-  <h1>$PBA</h1>
-  <h2 class="subtitle">Pure Belief Assets</h2>
-  <p class="tagline" id="typewriter">World's greatest psycho-financial experiment</p>
+  <div class="cursor" id="cursor"></div>
 
-  <div class="image-boxes">
-    <img src="first.jpg" alt="First">
-    <img src="second.jpg" alt="Second">
-    <img src="third.jpg" alt="Third">
-    <img src="fourth.jpeg" alt="Fourth">
+  <div id="homepage">
+    <h1 class="home-title">$PBA</h1>
+    <h2 class="subtitle">Pure Belief Assets</h2>
+
+    <p class="tagline" id="typewriter"></p>
+
+    <div class="image-boxes">
+      <img src="first.jpg" alt="First">
+      <img src="second.jpg" alt="Second">
+      <img src="third.jpg" alt="Third">
+      <img src="fourth.jpeg" alt="Fourth">
+    </div>
+
+    <div id="cryptoAddress">CA: 5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump</div>
+
+    <div class="links">
+      <a href="https://x.com/i/communities/1957015238290579938" target="_blank">X Community</a>
+      <a href="https://x.com/PBAOnSol" target="_blank">X Account</a>
+      <a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjgr39q5wqvw1n1htj44z3vl65r" target="_blank">DexScreener</a>
+    </div>
+
+    <button id="audioToggle">Unmute</button>
   </div>
 
-  <div class="links">
-    <a href="https://x.com/i/communities/1957015238290579938" target="_blank">X Community</a>
-    <a href="https://x.com/PBAOnSol" target="_blank">X Account</a>
-    <a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
-  </div>
+  <!-- VISION SECTION -->
+  <section id="vision">
+    <h2>The Vision</h2>
+    <p><strong>Beyond Markets</strong><br>$PBA transcends traditional market dynamics. We're not just an asset - we're a testament to the power of collective belief.</p>
+    <p><strong>Pure Conviction</strong><br>When markets are driven by fear, we stand united in our conviction. Our strength lies in our unwavering belief.</p>
+    <p><strong>Community First</strong><br>Every believer is a cornerstone of our movement. Together, we're building something bigger than ourselves.</p>
+    <p><strong>The Movement</strong><br>We Are The Believers<br>In a world of skeptics, we dare to believe. Our conviction is our strength, our unity is our power.</p>
+    <p><strong>We Are The Future</strong><br>$PBA represents more than gains - it's a revolution in how we perceive value. Through pure belief, we create our reality.</p>
+    <p><strong>We Are One</strong><br>Every holder is a believer. Every believer is a builder. Together, we're unstoppable.</p>
+  </section>
 
-  <div class="ca">CA: 94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds</div>
-</section>
+  <footer>© 2025 $PBA. All rights reserved.</footer>
 
-<!-- Vision Section -->
-<section id="vision">
-  <h2>The Vision</h2>
+  <script>
+    // CURSOR
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
 
-  <div class="vision-box">
-    <h3>Beyond Markets</h3>
-    <p>$PBA transcends traditional market dynamics. We're not just an asset – we're a testament to the power of collective belief.</p>
-  </div>
+    // TYPEWRITER TEXT
+    const messages = [
+      "Psycho-Financial Experiment", 
+      "Transcending Traditional Markets", 
+      "Community First. Believers Forever."
+    ];
+    let typeIndex = 0;
+    let charIndex = 0;
+    const typewriterEl = document.getElementById('typewriter');
 
-  <div class="vision-box">
-    <h3>Pure Conviction</h3>
-    <p>When markets are driven by fear, we stand united in our conviction. Our strength lies in our unwavering belief.</p>
-  </div>
+    function type() {
+      if(charIndex < messages[typeIndex].length) {
+        typewriterEl.textContent += messages[typeIndex][charIndex];
+        charIndex++;
+        setTimeout(type, 100);
+      } else {
+        setTimeout(erase, 1500);
+      }
+    }
+    function erase() {
+      if(charIndex > 0) {
+        typewriterEl.textContent = messages[typeIndex].substring(0, charIndex-1);
+        charIndex--;
+        setTimeout(erase, 50);
+      } else {
+        typeIndex = (typeIndex + 1) % messages.length;
+        setTimeout(type, 500);
+      }
+    }
+    type();
 
-  <div class="vision-box">
-    <h3>Community First</h3>
-    <p>Every believer is a cornerstone of our movement. Together, we're building something bigger than ourselves.</p>
-  </div>
+    // IMAGE ENLARGER
+    const images = document.querySelectorAll('.image-boxes img');
+    const closeBtn = document.createElement('button');
+    closeBtn.id = "closeImageBtn"; closeBtn.textContent = "X"; document.body.appendChild(closeBtn);
 
-  <footer>Everything starts with belief...</footer>
-</section>
+    images.forEach(img => img.addEventListener('click', () => {
+      img.classList.add('enlarged');
+      closeBtn.style.display = 'block';
+    }));
+    closeBtn.addEventListener('click', () => {
+      document.querySelector('.enlarged')?.classList.remove('enlarged');
+      closeBtn.style.display = 'none';
+    });
 
-<!-- Enlarged Image Modal -->
-<div id="enlargedImage">
-  <img src="" alt="Enlarged">
-  <button id="closeImageBtn">✖</button>
-</div>
+    // AUDIO TOGGLE
+    const audioBtn = document.getElementById('audioToggle');
+    const bgVideo = document.getElementById('bgvid');
+    audioBtn.addEventListener('click', () => {
+      if(bgVideo.muted){ bgVideo.muted = false; audioBtn.textContent="Mute"; }
+      else { bgVideo.muted = true; audioBtn.textContent="Unmute"; }
+    });
 
-<script>
-  // Typewriter
-  const typewriterEl = document.getElementById("typewriter");
-  const text = "World's greatest psycho-financial experiment";
-  let i = 0;
-  function typeWriter() {
-    if(i<text.length){ typewriterEl.innerHTML+=text.charAt(i); i++; setTimeout(typeWriter, 70);}
-  }
-  window.onload=typeWriter;
+    // INTRO SCREEN
+    const introScreen = document.getElementById('introScreen');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
 
-  // Image enlarge
-  const images = document.querySelectorAll(".image-boxes img");
-  const enlargedImage = document.getElementById("enlargedImage");
-  const enlargedImgTag = enlargedImage.querySelector("img");
-  const closeImageBtn = document.getElementById("closeImageBtn");
+    yesBtn.addEventListener('click', () => {
+      introScreen.style.display = 'none';
+      bgVideo.style.display = 'block';
+      audioBtn.style.display = 'block';
+      bgVideo.play();
+    });
 
-  images.forEach(img => {
-    img.addEventListener("click", ()=>{ enlargedImgTag.src=img.src; enlargedImage.style.display="flex"; });
-  });
-  closeImageBtn.addEventListener("click", ()=>{ enlargedImage.style.display="none"; });
-
-</script>
-
+    noBtn.addEventListener('click', () => {
+      alert("Then you may leave. $PBA is for believers only.");
+    });
+  </script>
 </body>
 </html>
