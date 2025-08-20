@@ -11,20 +11,21 @@ body { font-family: 'Courier New', monospace; color: #0f0; background: black; ov
 /* Intro Screen */
 #introScreen {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 3000;
-    color: #0f0;
-    text-align: center;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:3000;
+    text-align:center;
 }
 #introScreen video {
-    width: 60%;
-    height: auto;
+    width:60%;
+    height:auto;
     border: 2px solid #0f0;
     margin-bottom: 2rem;
 }
@@ -33,38 +34,33 @@ body { font-family: 'Courier New', monospace; color: #0f0; background: black; ov
     margin-bottom: 2rem;
 }
 #introScreen .buttons {
-    display: flex;
-    gap: 2rem;
+    display:flex;
+    gap:2rem;
 }
-#introScreen button {
-    padding: 1rem 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
+#introScreen .buttons button {
+    padding:1rem 2rem;
+    font-size:1.5rem;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+    transition:0.3s;
 }
-#introScreen button.yes {
-    background: #0f0;
-    color: black;
-}
-#introScreen button.no {
-    background: red;
-    color: white;
+#introScreen .buttons .yes { background:#0f0; color:black; }
+#introScreen .buttons .no { background:red; color:white; }
+
+/* Volume Slider */
+#volumeControl {
+    margin-top:1rem;
+    width:200px;
 }
 
 /* Homepage Section */
 section { width: 100%; }
-
-/* Homepage Section */
 #homepage { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 #homepage h1 { font-size: 6rem; letter-spacing: .1em; margin-bottom: 0.5rem; animation: flicker 2s infinite alternate; }
 #homepage h2.subtitle { font-size: 2.5rem; margin-bottom: 1rem; }
 #homepage p.tagline { font-size: 1.8rem; margin-bottom: 2rem; }
 @keyframes flicker { 0%,19%,21%,23%,25%,54%,56%,100% { text-shadow:0 0 4px #0f0,0 0 20px #0f0; } 20%,24%,55% { text-shadow:none; } }
-
-/* Background video */
 #homepage video.bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
 
 /* Image boxes */
@@ -110,7 +106,7 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 
 <!-- Intro Screen -->
 <div id="introScreen">
-    <video autoplay loop playsinline>
+    <video id="introVideo" autoplay loop playsinline>
         <source src="intro.mp4" type="video/mp4">
     </video>
     <h1>Are you a believer anon?</h1>
@@ -118,84 +114,64 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
         <button class="yes">YES</button>
         <button class="no">NO</button>
     </div>
+    <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="1">
 </div>
 
 <!-- Homepage Section -->
 <section id="homepage">
-    <video class="bg-video" autoplay loop muted playsinline>
-        <source src="background.mp4" type="video/mp4">
-    </video>
-    <h1>$PBA</h1>
-    <h2 class="subtitle">Pure Belief Assets</h2>
-    <p class="tagline" id="typewriter">World's greatest psycho-financial experiment</p>
-    <div class="image-boxes">
-        <img src="first.jpg" alt="First">
-        <img src="second.jpg" alt="Second">
-        <img src="third.jpg" alt="Third">
-        <img src="fourth.jpeg" alt="Fourth">
-    </div>
-    <div class="links">
-        <a href="https://x.com/i/communities/1957015238290579938" target="_blank">X Community</a>
-        <a href="https://x.com/PBAOnSol" target="_blank">X Account</a>
-        <a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
-    </div>
-    <div class="ca-label">Contract Address</div>
-    <div class="ca-box">
-        <span id="caText">5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump</span>
-        <button id="copyCA">COPY</button>
-    </div>
-    <a href="https://raydium.io/swap/?inputMint=sol&outputMint=5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump" target="_blank" id="buyRaydiumBtn">BUY ON RAYDIUM</a>
+<video class="bg-video" autoplay loop muted playsinline>
+<source src="background.mp4" type="video/mp4">
+</video>
+<h1>$PBA</h1>
+<h2 class="subtitle">Pure Belief Assets</h2>
+<p class="tagline" id="typewriter">World's greatest psycho-financial experiment</p>
+<div class="image-boxes">
+<img src="first.jpg" alt="First">
+<img src="second.jpg" alt="Second">
+<img src="third.jpg" alt="Third">
+<img src="fourth.jpeg" alt="Fourth">
+</div>
+<div class="links">
+<a href="https://x.com/i/communities/1957015238290579938" target="_blank">X Community</a>
+<a href="https://x.com/PBAOnSol" target="_blank">X Account</a>
+<a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
+</div>
+<div class="ca-label">Contract Address</div>
+<div class="ca-box">
+<span id="caText">5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump</span>
+<button id="copyCA">COPY</button>
+</div>
+<a href="https://raydium.io/swap/?inputMint=sol&outputMint=5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump" target="_blank" id="buyRaydiumBtn">BUY ON RAYDIUM</a>
 </section>
 
 <!-- Vision Section -->
 <section id="vision">
-    <h2>The Vision</h2>
-    <div class="vision-box">
-        <h3>Beyond Markets</h3>
-        <p>$PBA transcends traditional market dynamics. We're not just an asset – we're a testament to the power of collective belief.</p>
-    </div>
-    <div class="vision-box">
-        <h3>Pure Conviction</h3>
-        <p>When markets are driven by fear, we stand united in our conviction. Our strength lies in our unwavering belief.</p>
-    </div>
-    <div class="vision-box">
-        <h3>Community First</h3>
-        <p>Every believer is a cornerstone of our movement. Together, we're building something bigger than ourselves.</p>
-    </div>
-    <footer>Everything starts with belief...</footer>
+<h2>The Vision</h2>
+<div class="vision-box">
+<h3>Beyond Markets</h3>
+<p>$PBA transcends traditional market dynamics. We're not just an asset – we're a testament to the power of collective belief.</p>
+</div>
+<div class="vision-box">
+<h3>Pure Conviction</h3>
+<p>When markets are driven by fear, we stand united in our conviction. Our strength lies in our unwavering belief.</p>
+</div>
+<div class="vision-box">
+<h3>Community First</h3>
+<p>Every believer is a cornerstone of our movement. Together, we're building something bigger than ourselves.</p>
+</div>
+<footer>Everything starts with belief...</footer>
 </section>
 
 <!-- Enlarged Image Modal -->
 <div id="enlargedImage">
-    <img src="" alt="Enlarged">
-    <button id="closeImageBtn">✖</button>
+<img src="" alt="Enlarged">
+<button id="closeImageBtn">✖</button>
 </div>
 
 <!-- Floating Mute Button -->
 <button id="muteBtn">🔇</button>
 
 <script>
-// Intro Screen Logic
-const introScreen = document.getElementById("introScreen");
-const yesBtn = introScreen.querySelector(".yes");
-const noBtn = introScreen.querySelector(".no");
-let noClickCount = 0;
-
-yesBtn.addEventListener("click", () => {
-    introScreen.style.display = "none";
-});
-
-noBtn.addEventListener("click", () => {
-    noClickCount++;
-    if(noClickCount === 1) {
-        noBtn.textContent = "Fine! Stay Poor";
-    } else if(noClickCount === 2) {
-        noBtn.textContent = "Are you sure? Belief is powerful!";
-    } else if(noClickCount >= 3) {
-        noBtn.textContent = "$PBA is the future!";
-    }
-});
-
 // Typewriter
 const typewriterEl = document.getElementById("typewriter");
 const text = "World's greatest psycho-financial experiment";
@@ -208,30 +184,35 @@ const images = document.querySelectorAll(".image-boxes img");
 const enlargedImage = document.getElementById("enlargedImage");
 const enlargedImgTag = enlargedImage.querySelector("img");
 const closeImageBtn = document.getElementById("closeImageBtn");
-images.forEach(img => {
-    img.addEventListener("click", ()=>{ 
-        enlargedImgTag.src=img.src; 
-        enlargedImage.style.display="flex"; 
-    });
-});
+images.forEach(img => { img.addEventListener("click", ()=>{ enlargedImgTag.src=img.src; enlargedImage.style.display="flex"; }); });
 closeImageBtn.addEventListener("click", ()=>{ enlargedImage.style.display="none"; });
 
 // Mute/Unmute
 const video = document.querySelector(".bg-video");
 const muteBtn = document.getElementById("muteBtn");
-muteBtn.addEventListener("click", () => {
-    video.muted = !video.muted;
-    muteBtn.textContent = video.muted ? "🔇" : "🔊";
-});
+muteBtn.addEventListener("click", () => { video.muted = !video.muted; muteBtn.textContent = video.muted ? "🔇" : "🔊"; });
 
-// Copy CA to clipboard
-const copyBtn = document.getElementById("copyCA");
-const caText = document.getElementById("caText");
-copyBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(caText.textContent).then(() => {
-        copyBtn.textContent = "COPIED!";
-        setTimeout(() => { copyBtn.textContent = "COPY"; }, 2000);
-    });
+// Copy CA
+document.getElementById("copyCA").addEventListener("click", () => { navigator.clipboard.writeText(document.getElementById("caText").textContent); });
+
+// Intro Screen Logic
+const introScreen = document.getElementById("introScreen");
+const yesBtn = document.querySelector("#introScreen .yes");
+const noBtn = document.querySelector("#introScreen .no");
+const introVideo = document.getElementById("introVideo");
+const volumeControl = document.getElementById("volumeControl");
+
+// Volume control
+volumeControl.addEventListener("input", ()=>{ introVideo.volume = volumeControl.value; });
+
+// YES button
+yesBtn.addEventListener("click", ()=>{ introScreen.style.display="none"; });
+
+// NO button sequence
+noBtn.addEventListener("click", ()=>{
+    if(noBtn.textContent==="NO"){ noBtn.textContent="Fine! Stay Poor"; }
+    else if(noBtn.textContent==="Fine! Stay Poor"){ noBtn.textContent="Are you sure? Belief is powerful!"; }
+    else if(noBtn.textContent==="Are you sure? Belief is powerful!"){ noBtn.textContent="$PBA is the future!"; }
 });
 </script>
 
