@@ -137,6 +137,23 @@
     padding:0.5rem 1rem; font-size:1.2rem; cursor:pointer;
   }
 
+  /* Mute Button */
+  #muteBtn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    color: black;
+    background: #0f0;
+    border: 2px solid #0f0;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  #muteBtn:hover {
+    background: black;
+    color: #0f0;
+    box-shadow: 0 0 15px #0f0;
+  }
+
 </style>
 </head>
 <body>
@@ -150,6 +167,8 @@
   <h1>$PBA</h1>
   <h2 class="subtitle">Pure Belief Assets</h2>
   <p class="tagline" id="typewriter">World's greatest psycho-financial experiment</p>
+
+  <button id="muteBtn">Mute</button>
 
   <div class="image-boxes">
     <img src="first.jpg" alt="First">
@@ -216,6 +235,14 @@
   });
   closeImageBtn.addEventListener("click", ()=>{ enlargedImage.style.display="none"; });
 
+  // Mute/Unmute
+  const video = document.querySelector(".bg-video");
+  const muteBtn = document.getElementById("muteBtn");
+
+  muteBtn.addEventListener("click", () => {
+    video.muted = !video.muted;
+    muteBtn.textContent = video.muted ? "Unmute" : "Mute";
+  });
 </script>
 
 </body>
