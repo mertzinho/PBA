@@ -2,219 +2,220 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>$PBA – Psycho-Financial Experiment</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$PBA – Psycho-Financial Experiment</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Courier New', monospace; text-align: center; color: #0f0; overflow-x: hidden; background: black; position: relative; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Intro screen */
-#introScreen {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: black; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; z-index: 1000;
-}
-#introScreen video { width: 80%; max-width: 600px; border: 3px solid #0f0; margin-bottom: 2rem; }
-#introScreen h2 { font-size: 2rem; margin-bottom: 1.5rem; }
-.intro-buttons { display: flex; gap: 2rem; }
-.intro-buttons button { padding: 1rem 2rem; font-size: 1.5rem; border: none; cursor: pointer; font-family: inherit; transition: all 0.2s; }
-.yes-btn { background: black; border: 2px solid #0f0; color: #0f0; }
-.yes-btn:hover { background: #0f0; color: black; }
-.no-btn { background: black; border: 2px solid red; color: red; }
-.no-btn:hover { background: red; color: white; }
+  body {
+    font-family: 'Courier New', monospace;
+    color: #0f0;
+    background: black;
+    overflow-x: hidden;
+  }
 
-/* Background video */
-video.bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; object-fit: cover; }
+  section { width: 100%; }
 
-/* Homepage hero */
-#hero { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 1rem; }
-h1 { font-size: 5rem; margin-bottom: 0.5rem; letter-spacing: .1em; animation: flicker 2s infinite alternate; }
-h2.subtitle { font-size: 2rem; margin-bottom: 1rem; }
-p.tagline { font-size: 1.5rem; margin-bottom: 1.5rem; opacity: 0.9; line-height: 1.5; min-height: 3rem; }
-.image-boxes { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
-.image-boxes img { width: 200px; height: 150px; object-fit: cover; border: 3px solid #0f0; box-shadow: 0 0 15px #0f0; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
-.image-boxes img:hover { transform: scale(1.05); box-shadow: 0 0 25px #0f0, 0 0 50px #0f0; }
-.links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 1rem; }
-.links a { color: #0f0; text-decoration: none; border: 2px solid #0f0; padding: 0.5rem 1rem; font-size: 1rem; transition: background-color .2s, color .2s, box-shadow .2s; }
-.links a:hover { background-color: #0f0; color: #000; box-shadow: 0 0 15px #0f0; }
-.ca { font-size: 1rem; margin-bottom: 1rem; word-break: break-all; }
+  /* Homepage Section */
+  #homepage {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 
-/* Cursor */
-.cursor { width: 20px; height: 20px; border: 2px solid #0f0; border-radius: 50%; position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 999; box-shadow: 0 0 10px #0f0, 0 0 20px #0f0; transition: transform 0.1s ease; }
+  #homepage h1 {
+    font-size: 6rem;
+    letter-spacing: .1em;
+    margin-bottom: 0.5rem;
+    animation: flicker 2s infinite alternate;
+  }
+  #homepage h2.subtitle { font-size: 2.5rem; margin-bottom: 1rem; }
+  #homepage p.tagline { font-size: 1.8rem; margin-bottom: 2rem; }
 
-/* Vision section */
-#vision { padding: 6rem 1rem; background: black; color: #0f0; }
-#vision h2 { font-size: 3rem; margin-bottom: 3rem; text-shadow: 0 0 15px #0f0; }
-.vision-box { max-width: 800px; margin: 2rem auto; padding: 2rem; border: 2px solid #0f0; box-shadow: 0 0 15px #0f0; background: rgba(0,0,0,0.7); text-align: left; }
-.vision-box h3 { font-size: 2rem; margin-bottom: 1rem; }
-.vision-box p { font-size: 1.2rem; line-height: 1.6; }
-.vision-center { max-width: 800px; margin: 4rem auto 0; text-align: center; }
-.vision-center h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-.vision-center p { margin: 1rem 0; font-size: 1.2rem; }
+  @keyframes flicker {
+    0%,19%,21%,23%,25%,54%,56%,100% { text-shadow:0 0 4px #0f0,0 0 20px #0f0; }
+    20%,24%,55% { text-shadow:none; }
+  }
 
-/* Footer */
-footer { position: relative; bottom: 1rem; font-size: 1.2rem; opacity: 0.8; width: 100%; text-align: center; margin-top: 2rem; }
+  /* Background video */
+  #homepage video.bg-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
 
-/* Animations */
-@keyframes flicker { 0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 4px #0f0, 0 0 20px #0f0; } 20%, 24%, 55% { text-shadow: none; } }
+  /* Image boxes */
+  .image-boxes {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .image-boxes img {
+    width: 250px; height: 180px;
+    object-fit: cover;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 15px #0f0;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .image-boxes img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #0f0,0 0 50px #0f0;
+  }
+
+  /* Links */
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .links a {
+    color: #0f0;
+    border: 2px solid #0f0;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  .links a:hover { background:#0f0; color:black; box-shadow:0 0 15px #0f0; }
+
+  /* Contract Address */
+  .ca { font-size: 1.2rem; margin-bottom: 1rem; word-break: break-all; }
+
+  /* Vision Section */
+  #vision {
+    height: 100vh;
+    background: black;
+    color: #0f0;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #vision h2 { font-size: 3rem; margin-bottom: 2rem; text-shadow: 0 0 15px #0f0; }
+  .vision-box {
+    max-width: 800px;
+    margin: 1rem auto;
+    padding: 1.5rem;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 15px #0f0;
+    background: rgba(0,0,0,0.7);
+    text-align: left;
+  }
+  .vision-box h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+  .vision-box p { font-size: 1.1rem; line-height: 1.5; }
+
+  footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
+
+  /* Enlarged Image Modal */
+  #enlargedImage {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    align-items:center; justify-content:center;
+    z-index:2000; flex-direction: column;
+  }
+  #enlargedImage img {
+    max-width:90%; max-height:80%;
+    border: 2px solid #0f0;
+    box-shadow:0 0 25px #0f0;
+  }
+  #closeImageBtn {
+    margin-top:1rem; background:red; color:white; border:none;
+    padding:0.5rem 1rem; font-size:1.2rem; cursor:pointer;
+  }
+
 </style>
 </head>
 <body>
 
-<!-- Intro -->
-<div id="introScreen">
-  <video autoplay loop muted playsinline>
-    <source src="intro.mp4" type="video/mp4">
+<!-- Homepage Section -->
+<section id="homepage">
+  <video class="bg-video" autoplay loop muted playsinline>
+    <source src="background.mp4" type="video/mp4">
   </video>
-  <h2>Are you a believer anon?</h2>
-  <div class="intro-buttons">
-    <button class="yes-btn" id="yesBtn">Yes</button>
-    <button class="no-btn" id="noBtn">No</button>
-  </div>
-</div>
 
-<!-- Background video -->
-<video class="bg-video" autoplay loop muted playsinline id="bgvid">
-  <source src="background.mp4" type="video/mp4">
-</video>
-
-<!-- Cursor -->
-<div class="cursor" id="cursor"></div>
-
-<!-- Homepage Hero -->
-<div id="hero">
   <h1>$PBA</h1>
   <h2 class="subtitle">Pure Belief Assets</h2>
-  <p class="tagline" id="typewriter"></p>
+  <p class="tagline" id="typewriter">World's greatest psycho-financial experiment</p>
+
   <div class="image-boxes">
     <img src="first.jpg" alt="First">
     <img src="second.jpg" alt="Second">
     <img src="third.jpg" alt="Third">
     <img src="fourth.jpeg" alt="Fourth">
   </div>
+
   <div class="links">
     <a href="https://x.com/i/communities/1957015238290579938" target="_blank">X Community</a>
     <a href="https://x.com/PBAOnSol" target="_blank">X Account</a>
     <a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
   </div>
+
   <div class="ca">CA: 94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds</div>
-</div>
+</section>
 
-<button id="audioToggle">Mute</button>
+<!-- Vision Section -->
+<section id="vision">
+  <h2>The Vision</h2>
 
-<!-- Enlarged image -->
+  <div class="vision-box">
+    <h3>Beyond Markets</h3>
+    <p>$PBA transcends traditional market dynamics. We're not just an asset – we're a testament to the power of collective belief.</p>
+  </div>
+
+  <div class="vision-box">
+    <h3>Pure Conviction</h3>
+    <p>When markets are driven by fear, we stand united in our conviction. Our strength lies in our unwavering belief.</p>
+  </div>
+
+  <div class="vision-box">
+    <h3>Community First</h3>
+    <p>Every believer is a cornerstone of our movement. Together, we're building something bigger than ourselves.</p>
+  </div>
+
+  <footer>Everything starts with belief...</footer>
+</section>
+
+<!-- Enlarged Image Modal -->
 <div id="enlargedImage">
   <img src="" alt="Enlarged">
   <button id="closeImageBtn">✖</button>
 </div>
 
-<!-- Vision -->
-<section id="vision">
-  <h2>The Vision</h2>
-  <div class="vision-box">
-    <h3>Beyond Markets</h3>
-    <p>$PBA transcends traditional market dynamics. We're not just an asset – we're a testament to the power of collective belief.</p>
-  </div>
-  <div class="vision-box">
-    <h3>Pure Conviction</h3>
-    <p>When markets are driven by fear, we stand united in our conviction. Our strength lies in our unwavering belief.</p>
-  </div>
-  <div class="vision-box">
-    <h3>Community First</h3>
-    <p>Every believer is a cornerstone of our movement. Together, we're building something bigger than ourselves.</p>
-  </div>
-  <div class="vision-center">
-    <h2>The Movement</h2>
-    <p><strong>We Are The Believers</strong></p>
-    <p><em>In a world of skeptics, we dare to believe. Our conviction is our strength, our unity is our power.</em></p>
-    <p><strong>We Are The Future</strong></p>
-    <p><em>$PBA represents more than gains – it's a revolution in how we perceive value. Through pure belief, we create our reality.</em></p>
-    <p><strong>We Are One</strong></p>
-    <p><em>Every holder is a believer. Every believer is a builder. Together, we're unstoppable.</em></p>
-  </div>
-</section>
-
-<footer>Everything starts with belief...</footer>
-
 <script>
-// Typewriter
-const text = "World's greatest psycho-financial experiment";
-let i = 0;
-function typeWriter() {
-  if (i < text.length) {
-    document.getElementById("typewriter").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 70);
+  // Typewriter
+  const typewriterEl = document.getElementById("typewriter");
+  const text = "World's greatest psycho-financial experiment";
+  let i = 0;
+  function typeWriter() {
+    if(i<text.length){ typewriterEl.innerHTML+=text.charAt(i); i++; setTimeout(typeWriter, 70);}
   }
-}
-window.onload = typeWriter;
+  window.onload=typeWriter;
 
-// Cursor
-const cursor = document.getElementById("cursor");
-document.addEventListener("mousemove", e => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
+  // Image enlarge
+  const images = document.querySelectorAll(".image-boxes img");
+  const enlargedImage = document.getElementById("enlargedImage");
+  const enlargedImgTag = enlargedImage.querySelector("img");
+  const closeImageBtn = document.getElementById("closeImageBtn");
 
-// Video sound toggle
-const video = document.getElementById("bgvid");
-const audioToggle = document.getElementById("audioToggle");
-audioToggle.addEventListener("click", () => {
-  video.muted = !video.muted;
-  audioToggle.innerText = video.muted ? "Unmute" : "Mute";
-});
-
-// Stop video when Vision scroll reached
-window.addEventListener("scroll", () => {
-  const vision = document.getElementById("vision");
-  const visionTop = vision.getBoundingClientRect().top;
-  if (visionTop < window.innerHeight / 2) {
-    video.style.display = "none";
-  } else {
-    video.style.display = "block";
-  }
-});
-
-// Image enlarge
-const images = document.querySelectorAll(".image-boxes img");
-const enlargedImage = document.getElementById("enlargedImage");
-const enlargedImgTag = enlargedImage.querySelector("img");
-const closeImageBtn = document.getElementById("closeImageBtn");
-images.forEach(img => {
-  img.addEventListener("click", () => {
-    enlargedImgTag.src = img.src;
-    enlargedImage.style.display = "flex";
+  images.forEach(img => {
+    img.addEventListener("click", ()=>{ enlargedImgTag.src=img.src; enlargedImage.style.display="flex"; });
   });
-});
-closeImageBtn.addEventListener("click", () => {
-  enlargedImage.style.display = "none";
-});
+  closeImageBtn.addEventListener("click", ()=>{ enlargedImage.style.display="none"; });
 
-// Drop effect
-document.body.addEventListener("click", () => {
-  const dropsCount = Math.floor(Math.random() * 2) + 3;
-  for (let i = 0; i < dropsCount; i++) {
-    const drop = document.createElement("img");
-    drop.src = "drop.png";
-    drop.style.position = "fixed";
-    drop.style.top = "-50px";
-    drop.style.left = Math.random() * window.innerWidth + "px";
-    drop.style.width = "30px";
-    drop.style.zIndex = 9999;
-    document.body.appendChild(drop);
-    let pos = -50;
-    const fall = setInterval(() => {
-      pos += 5;
-      drop.style.top = pos + "px";
-      if (pos > window.innerHeight) { clearInterval(fall); drop.remove(); }
-    }, 20);
-  }
-});
-
-// Intro buttons
-document.getElementById("yesBtn").addEventListener("click", () => { document.getElementById("introScreen").style.display = "none"; });
-document.getElementById("noBtn").addEventListener("click", () => { window.location.href = "https://www.google.com"; });
 </script>
 
 </body>
