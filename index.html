@@ -170,6 +170,37 @@
   .vision-box h3 { font-size: 2rem; margin-bottom: 0.5rem; }
   .vision-box p { font-size: 1.1rem; line-height: 1.5; }
 
+  /* Movement Section */
+  #movement {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 3rem;
+    gap: 2rem;
+  }
+  #movement h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-shadow: 0 0 15px #0f0;
+  }
+  .movement-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 700px;
+  }
+  .movement-box {
+    padding: 1.5rem;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 15px #0f0;
+    background: rgba(0,0,0,0.7);
+  }
+  .movement-box h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+  .movement-box p { font-size: 1.1rem; line-height: 1.5; }
+
   footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 
   /* Enlarged Image Modal */
@@ -260,67 +291,37 @@
 
   <div class="vision-box">
     <h3>Beyond Markets</h3>
-    <p>$PBA transcends traditional market dynamics. We're not just an asset – we're a testament to the power of collective belief.</p>
+    <p>$PBA transcends conventional finance, merging belief with reality.</p>
   </div>
 
-  <div class="vision-box">
-    <h3>Pure Conviction</h3>
-    <p>When markets are driven by fear, we stand united in our conviction. Our strength lies in our unwavering belief.</p>
+  <!-- The Movement Section -->
+  <div id="movement">
+    <h2>The Movement</h2>
+    <div class="movement-boxes">
+      <div class="movement-box">
+        <h3>We Are The Believers</h3>
+        <p>In a world of skeptics, we dare to believe. Our conviction is our strength, our unity is our power.</p>
+      </div>
+      <div class="movement-box">
+        <h3>We Are The Future</h3>
+        <p>$PBA represents more than gains - it's a revolution in how we perceive value. Through pure belief, we create our reality.</p>
+      </div>
+      <div class="movement-box">
+        <h3>We Are One</h3>
+        <p>Every holder is a believer. Every believer is a builder. Together, we're unstoppable.</p>
+      </div>
+    </div>
   </div>
-
-  <div class="vision-box">
-    <h3>Community First</h3>
-    <p>Every believer is a cornerstone of our movement. Together, we're building something bigger than ourselves.</p>
-  </div>
-
-  <footer>Everything starts with belief...</footer>
 </section>
 
-<!-- Enlarged Image Modal -->
-<div id="enlargedImage">
-  <img src="" alt="Enlarged">
-  <button id="closeImageBtn">✖</button>
-</div>
-
-<!-- Floating Mute Button -->
-<button id="muteBtn">🔇</button>
+<footer>&copy; 2025 $PBA. All rights reserved.</footer>
 
 <script>
-  // Typewriter
-  const typewriterEl = document.getElementById("typewriter");
-  const text = "World's greatest psycho-financial experiment";
-  let i = 0;
-  function typeWriter() {
-    if(i<text.length){ typewriterEl.innerHTML+=text.charAt(i); i++; setTimeout(typeWriter, 70);}
-  }
-  window.onload=typeWriter;
-
-  // Image enlarge
-  const images = document.querySelectorAll(".image-boxes img");
-  const enlargedImage = document.getElementById("enlargedImage");
-  const enlargedImgTag = enlargedImage.querySelector("img");
-  const closeImageBtn = document.getElementById("closeImageBtn");
-
-  images.forEach(img => {
-    img.addEventListener("click", ()=>{ enlargedImgTag.src=img.src; enlargedImage.style.display="flex"; });
-  });
-  closeImageBtn.addEventListener("click", ()=>{ enlargedImage.style.display="none"; });
-
-  // Mute/Unmute
-  const video = document.querySelector(".bg-video");
-  const muteBtn = document.getElementById("muteBtn");
-
-  muteBtn.addEventListener("click", () => {
-    video.muted = !video.muted;
-    muteBtn.textContent = video.muted ? "🔇" : "🔊";
-  });
-
-  // Copy CA to clipboard
-  const copyBtn = document.getElementById("copyCA");
-  const caText = document.getElementById("caText");
-
-  copyBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(caText.textContent).then(() => {
+  // Copy CA
+  document.getElementById("copyCA").addEventListener("click", function() {
+    const caText = document.getElementById("caText").textContent;
+    navigator.clipboard.writeText(caText).then(() => {
+      const copyBtn = document.getElementById("copyCA");
       copyBtn.textContent = "COPIED!";
       setTimeout(() => { copyBtn.textContent = "COPY"; }, 2000);
     });
