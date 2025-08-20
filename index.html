@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -92,6 +92,27 @@ section { width: 100%; }
 .vision-box p { font-size: 1.1rem; line-height: 1.5; }
 footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 
+/* Twitter Feed Section */
+#twitterFeed {
+    background:black;
+    color:#0f0;
+    padding:3rem 1rem;
+    text-align:center;
+    border-top: 2px solid #0f0;
+    box-shadow: inset 0 0 30px #0f0;
+}
+#twitterFeed h2 {
+    font-size:2.8rem;
+    margin-bottom:1.5rem;
+    text-shadow:0 0 15px #0f0, 0 0 30px #0f0;
+}
+#twitterFeed .twitter-timeline {
+    border:2px solid #0f0 !important;
+    box-shadow:0 0 25px #0f0, 0 0 50px #0f0;
+    border-radius:12px;
+    overflow:hidden;
+}
+
 /* Enlarged Image Modal */
 #enlargedImage { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: none; align-items:center; justify-content:center; z-index:2000; flex-direction: column; }
 #enlargedImage img { max-width:90%; max-height:80%; border: 2px solid #0f0; box-shadow:0 0 25px #0f0; }
@@ -162,6 +183,17 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 <footer>Everything starts with belief...</footer>
 </section>
 
+<!-- Twitter Feed Section -->
+<section id="twitterFeed">
+  <h2>🔥 Live Updates from @PBAOnSol 🔥</h2>
+  <a class="twitter-timeline" 
+     data-theme="dark" 
+     data-height="600" 
+     href="https://x.com/PBAOnSol?ref_src=twsrc%5Etfw">
+     Tweets by PBAOnSol
+  </a>
+</section>
+
 <!-- Enlarged Image Modal -->
 <div id="enlargedImage">
 <img src="" alt="Enlarged">
@@ -170,6 +202,8 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 
 <!-- Floating Mute Button -->
 <button id="muteBtn">🔇</button>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <script>
 // Typewriter
