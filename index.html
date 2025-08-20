@@ -206,7 +206,11 @@ const volumeControl = document.getElementById("volumeControl");
 volumeControl.addEventListener("input", ()=>{ introVideo.volume = volumeControl.value; });
 
 // YES button
-yesBtn.addEventListener("click", ()=>{ introScreen.style.display="none"; });
+yesBtn.addEventListener("click", ()=>{
+    introScreen.style.display="none";
+    introVideo.pause();         // stop video
+    introVideo.currentTime = 0; // reset
+});
 
 // NO button sequence
 noBtn.addEventListener("click", ()=>{
