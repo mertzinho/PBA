@@ -6,7 +6,37 @@
 <title>$PBA – Pure Belief Assets | The Movement</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Courier New', monospace; color: #0f0; background: black; overflow-x: hidden; }
+body { font-family: 'Courier New', monospace; color: #0f0; background: black; overflow-x: hidden; cursor: none; } /* hide default cursor */
+
+/* Green Cursor Effect */
+.cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #0f0;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    box-shadow: 0 0 15px #0f0, 0 0 30px #0f0;
+    transform: translate(-50%, -50%);
+    z-index: 4000;
+}
+
+/* Falling logos */
+.drop {
+    position: fixed;
+    top: -100px;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    animation: fall linear forwards;
+    z-index: 2000;
+}
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
 
 /* Intro Screen */
 #introScreen {
@@ -117,6 +147,9 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 </style>
 </head>
 <body>
+
+<!-- Custom Green Cursor -->
+<div class="cursor-dot" id="cursor"></div>
 
 <!-- Intro Screen -->
 <div id="introScreen">
@@ -240,6 +273,26 @@ noBtn.addEventListener("click", ()=>{
 introMuteBtn.addEventListener("click", ()=>{
     introVideo.muted = !introVideo.muted;
     introMuteBtn.textContent = introVideo.muted ? "🔇 Mute/Unmute" : "🔊 Mute/Unmute";
+});
+
+// Green cursor follow
+const cursor = document.getElementById("cursor");
+document.addEventListener("mousemove", e => {
+    cursor.style.top = e.clientY + "px";
+    cursor.style.left = e.clientX + "px";
+});
+
+// Drop logo rain on click
+document.addEventListener("click", e => {
+    for (let j = 0; j < 5; j++) { // drop 5 per click
+        const drop = document.createElement("img");
+        drop.src = "drop.png";
+        drop.className = "drop";
+        drop.style.left = Math.random() * window.innerWidth + "px";
+        drop.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(drop);
+        setTimeout(() => drop.remove(), 5000);
+    }
 });
 </script>
 
