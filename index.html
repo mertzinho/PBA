@@ -84,17 +84,6 @@ section { width: 100%; }
 #buyRaydiumBtn { display: block; margin: 0.5rem auto 2rem auto; padding: 0.7rem 1.5rem; font-size: 1.2rem; font-weight: bold; border: 2px solid #0f0; border-radius: 10px; background: black; color: #0f0; cursor: pointer; transition: 0.3s; text-decoration: none; }
 #buyRaydiumBtn:hover { background: #0f0; color: black; box-shadow: 0 0 15px #0f0; }
 
-/* Twitter Feed */
-.twitter-feed {
-    max-width: 600px;
-    margin: 2rem auto;
-    border: 2px solid #0f0;
-    box-shadow: 0 0 15px #0f0;
-    border-radius: 12px;
-    padding: 0.5rem;
-    background: rgba(0,0,0,0.7);
-}
-
 /* Vision Section */
 #vision { min-height: 100vh; background: black; color: #0f0; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 #vision h2 { font-size: 3rem; margin-bottom: 2rem; text-shadow: 0 0 15px #0f0; }
@@ -153,17 +142,6 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 <button id="copyCA">COPY</button>
 </div>
 <a href="https://raydium.io/swap/?inputMint=sol&outputMint=5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump" target="_blank" id="buyRaydiumBtn">BUY ON RAYDIUM</a>
-
-<!-- Embedded Twitter Timeline -->
-<div class="twitter-feed">
-    <a class="twitter-timeline" 
-       data-theme="dark" 
-       data-chrome="transparent noheader nofooter noborders" 
-       data-tweet-limit="3"
-       href="https://x.com/PBAOnSol">
-       Tweets by PBAOnSol
-    </a>
-</div>
 </section>
 
 <!-- Vision Section -->
@@ -242,9 +220,6 @@ noBtn.addEventListener("click", ()=>{
     else if(noBtn.textContent==="Are you sure? Belief is powerful!"){ noBtn.textContent="$PBA is the future!"; }
 });
 </script>
-
-<!-- X (Twitter) embed script -->
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>
