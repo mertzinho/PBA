@@ -148,7 +148,7 @@
 
   /* Vision Section */
   #vision {
-    height: 100vh;
+    min-height: 100vh;
     background: black;
     color: #0f0;
     padding: 2rem 1rem;
@@ -201,6 +201,7 @@
   .movement-box h3 { font-size: 2rem; margin-bottom: 0.5rem; }
   .movement-box p { font-size: 1.1rem; line-height: 1.5; }
 
+  /* Footer */
   footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 
   /* Enlarged Image Modal */
@@ -247,6 +248,21 @@
     color: #0f0;
     box-shadow: 0 0 15px #0f0;
   }
+
+  /* Responsive Styles */
+  @media (max-width: 900px) {
+    #movement {
+      flex-direction: column;
+      align-items: center;
+    }
+    #movement h2 {
+      writing-mode: horizontal-tb;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .movement-boxes { width: 100%; }
+  }
+
 </style>
 </head>
 <body>
@@ -280,18 +296,16 @@
     <span id="caText">94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds</span>
     <button id="copyCA">COPY</button>
   </div>
+  <a href="https://raydium.io/swap/?inputMint=sol&outputMint=5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump" target="_blank" id="buyRaydiumBtn">Buy on Raydium</a>
 
-  <!-- Buy on Raydium Button -->
-  <a href="https://raydium.io/swap/?inputMint=sol&outputMint=5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump" target="_blank" id="buyRaydiumBtn">BUY ON RAYDIUM</a>
 </section>
 
-<!-- Vision Section -->
+<!-- Vision & Movement Section -->
 <section id="vision">
-  <h2>The Vision</h2>
-
+  <h2>Vision</h2>
   <div class="vision-box">
-    <h3>Beyond Markets</h3>
-    <p>$PBA transcends conventional finance, merging belief with reality.</p>
+    <h3>Psycho-Financial Experiment</h3>
+    <p>$PBA merges imagination with conventional finance, merging belief with reality.</p>
   </div>
 
   <!-- The Movement Section -->
