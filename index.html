@@ -56,7 +56,7 @@ body { font-family: 'Courier New', monospace; color: #0f0; background: black; ov
 
 /* Homepage Section */
 section { width: 100%; }
-#homepage { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+#homepage { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-bottom: 3rem; }
 #homepage h1 { font-size: 6rem; letter-spacing: .1em; margin-bottom: 0.5rem; animation: flicker 2s infinite alternate; }
 #homepage h2.subtitle { font-size: 2.5rem; margin-bottom: 1rem; }
 #homepage p.tagline { font-size: 1.8rem; margin-bottom: 2rem; }
@@ -84,34 +84,24 @@ section { width: 100%; }
 #buyRaydiumBtn { display: block; margin: 0.5rem auto 2rem auto; padding: 0.7rem 1.5rem; font-size: 1.2rem; font-weight: bold; border: 2px solid #0f0; border-radius: 10px; background: black; color: #0f0; cursor: pointer; transition: 0.3s; text-decoration: none; }
 #buyRaydiumBtn:hover { background: #0f0; color: black; box-shadow: 0 0 15px #0f0; }
 
+/* Twitter Feed */
+.twitter-feed {
+    max-width: 600px;
+    margin: 2rem auto;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 15px #0f0;
+    border-radius: 12px;
+    padding: 0.5rem;
+    background: rgba(0,0,0,0.7);
+}
+
 /* Vision Section */
-#vision { height: 100vh; background: black; color: #0f0; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#vision { min-height: 100vh; background: black; color: #0f0; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 #vision h2 { font-size: 3rem; margin-bottom: 2rem; text-shadow: 0 0 15px #0f0; }
 .vision-box { max-width: 800px; margin: 1rem auto; padding: 1.5rem; border: 2px solid #0f0; box-shadow: 0 0 15px #0f0; background: rgba(0,0,0,0.7); text-align: left; }
 .vision-box h3 { font-size: 2rem; margin-bottom: 0.5rem; }
 .vision-box p { font-size: 1.1rem; line-height: 1.5; }
 footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
-
-/* Twitter Feed Section */
-#twitterFeed {
-    background:black;
-    color:#0f0;
-    padding:3rem 1rem;
-    text-align:center;
-    border-top: 2px solid #0f0;
-    box-shadow: inset 0 0 30px #0f0;
-}
-#twitterFeed h2 {
-    font-size:2.8rem;
-    margin-bottom:1.5rem;
-    text-shadow:0 0 15px #0f0, 0 0 30px #0f0;
-}
-#twitterFeed .twitter-timeline {
-    border:2px solid #0f0 !important;
-    box-shadow:0 0 25px #0f0, 0 0 50px #0f0;
-    border-radius:12px;
-    overflow:hidden;
-}
 
 /* Enlarged Image Modal */
 #enlargedImage { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: none; align-items:center; justify-content:center; z-index:2000; flex-direction: column; }
@@ -127,7 +117,7 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 
 <!-- Intro Screen -->
 <div id="introScreen">
-    <video id="introVideo"  autoplay loop playsinline muted>
+    <video id="introVideo" autoplay loop playsinline muted>
         <source src="intro.mp4" type="video/mp4">
     </video>
     <h1>Are you a believer anon?</h1>
@@ -163,6 +153,17 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 <button id="copyCA">COPY</button>
 </div>
 <a href="https://raydium.io/swap/?inputMint=sol&outputMint=5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump" target="_blank" id="buyRaydiumBtn">BUY ON RAYDIUM</a>
+
+<!-- Embedded Twitter Timeline -->
+<div class="twitter-feed">
+    <a class="twitter-timeline" 
+       data-theme="dark" 
+       data-chrome="transparent noheader nofooter noborders" 
+       data-tweet-limit="3"
+       href="https://x.com/PBAOnSol">
+       Tweets by PBAOnSol
+    </a>
+</div>
 </section>
 
 <!-- Vision Section -->
@@ -183,17 +184,6 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 <footer>Everything starts with belief...</footer>
 </section>
 
-<!-- Twitter Feed Section -->
-<section id="twitterFeed">
-  <h2>🔥 Live Updates from @PBAOnSol 🔥</h2>
-  <a class="twitter-timeline" 
-     data-theme="dark" 
-     data-height="600" 
-     href="https://x.com/PBAOnSol?ref_src=twsrc%5Etfw">
-     Tweets by PBAOnSol
-  </a>
-</section>
-
 <!-- Enlarged Image Modal -->
 <div id="enlargedImage">
 <img src="" alt="Enlarged">
@@ -202,8 +192,6 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
 
 <!-- Floating Mute Button -->
 <button id="muteBtn">🔇</button>
-
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <script>
 // Typewriter
@@ -236,14 +224,15 @@ const noBtn = document.querySelector("#introScreen .no");
 const introVideo = document.getElementById("introVideo");
 const volumeControl = document.getElementById("volumeControl");
 
-// Volume control
-volumeControl.addEventListener("input", ()=>{ introVideo.volume = volumeControl.value; });
+// Allow video sound after user interacts
+introVideo.muted = true;
+volumeControl.addEventListener("input", ()=>{ introVideo.muted=false; introVideo.volume = volumeControl.value; });
 
 // YES button
 yesBtn.addEventListener("click", ()=>{
     introScreen.style.display="none";
-    introVideo.pause();         // stop video
-    introVideo.currentTime = 0; // reset
+    introVideo.pause();
+    introVideo.currentTime = 0;
 });
 
 // NO button sequence
@@ -253,6 +242,9 @@ noBtn.addEventListener("click", ()=>{
     else if(noBtn.textContent==="Are you sure? Belief is powerful!"){ noBtn.textContent="$PBA is the future!"; }
 });
 </script>
+
+<!-- X (Twitter) embed script -->
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>
