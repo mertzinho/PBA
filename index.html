@@ -48,10 +48,23 @@ body { font-family: 'Courier New', monospace; color: #0f0; background: black; ov
 #introScreen .buttons .yes { background:#0f0; color:black; }
 #introScreen .buttons .no { background:red; color:white; }
 
-/* Volume Slider */
-#volumeControl {
-    margin-top:1rem;
-    width:200px;
+/* Intro mute button */
+#introMuteBtn {
+    margin-top:1.5rem;
+    padding:0.7rem 1.5rem;
+    font-size:1.2rem;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+    background:#0f0;
+    color:black;
+    transition:0.3s;
+}
+#introMuteBtn:hover {
+    background:black;
+    color:#0f0;
+    box-shadow:0 0 15px #0f0;
 }
 
 /* Homepage Section */
@@ -114,7 +127,7 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1.2rem; }
         <button class="yes">YES</button>
         <button class="no">NO</button>
     </div>
-    <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="1">
+    <button id="introMuteBtn">🔇 Mute/Unmute</button>
 </div>
 
 <!-- Homepage Section -->
@@ -187,7 +200,7 @@ const closeImageBtn = document.getElementById("closeImageBtn");
 images.forEach(img => { img.addEventListener("click", ()=>{ enlargedImgTag.src=img.src; enlargedImage.style.display="flex"; }); });
 closeImageBtn.addEventListener("click", ()=>{ enlargedImage.style.display="none"; });
 
-// Mute/Unmute
+// Mute/Unmute homepage video
 const video = document.querySelector(".bg-video");
 const muteBtn = document.getElementById("muteBtn");
 muteBtn.addEventListener("click", () => { video.muted = !video.muted; muteBtn.textContent = video.muted ? "🔇" : "🔊"; });
@@ -200,11 +213,10 @@ const introScreen = document.getElementById("introScreen");
 const yesBtn = document.querySelector("#introScreen .yes");
 const noBtn = document.querySelector("#introScreen .no");
 const introVideo = document.getElementById("introVideo");
-const volumeControl = document.getElementById("volumeControl");
+const introMuteBtn = document.getElementById("introMuteBtn");
 
-// Allow video sound after user interacts
+// Ensure intro starts muted
 introVideo.muted = true;
-volumeControl.addEventListener("input", ()=>{ introVideo.muted=false; introVideo.volume = volumeControl.value; });
 
 // YES button
 yesBtn.addEventListener("click", ()=>{
@@ -218,6 +230,12 @@ noBtn.addEventListener("click", ()=>{
     if(noBtn.textContent==="NO"){ noBtn.textContent="Fine! Stay Poor"; }
     else if(noBtn.textContent==="Fine! Stay Poor"){ noBtn.textContent="Are you sure? Belief is powerful!"; }
     else if(noBtn.textContent==="Are you sure? Belief is powerful!"){ noBtn.textContent="$PBA is the future!"; }
+});
+
+// Intro mute toggle
+introMuteBtn.addEventListener("click", ()=>{
+    introVideo.muted = !introVideo.muted;
+    introMuteBtn.textContent = introVideo.muted ? "🔇 Mute/Unmute" : "🔊 Mute/Unmute";
 });
 </script>
 
