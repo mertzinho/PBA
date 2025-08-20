@@ -89,12 +89,13 @@
   .links a:hover { background:#0f0; color:black; box-shadow:0 0 15px #0f0; }
 
   /* Contract Address Box */
+  .ca-label { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; text-shadow: 0 0 5px #0f0; }
   .ca-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
     max-width: 700px;
-    margin: 1rem auto;
+    margin: 0.5rem auto 1rem auto;
     padding: 1rem 1.5rem;
     background-color: #0f0;
     color: white;
@@ -102,6 +103,10 @@
     font-weight: bold;
     border-radius: 10px;
     box-shadow: 0 0 15px #0f0;
+    transition: 0.3s;
+  }
+  .ca-box:hover {
+    box-shadow: 0 0 25px #0f0, 0 0 50px #0f0, 0 0 75px #0f0;
   }
   .ca-box button {
     margin-left: 1rem;
@@ -238,7 +243,8 @@
     <a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
   </div>
 
-  <!-- Contract Address Box -->
+  <!-- Contract Address Label + Box -->
+  <div class="ca-label">Contract Address</div>
   <div class="ca-box">
     <span id="caText">94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds</span>
     <button id="copyCA">COPY</button>
@@ -320,6 +326,5 @@
     });
   });
 </script>
-
 </body>
 </html>
