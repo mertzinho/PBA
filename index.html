@@ -88,8 +88,58 @@
   }
   .links a:hover { background:#0f0; color:black; box-shadow:0 0 15px #0f0; }
 
-  /* Contract Address */
-  .ca { font-size: 1.2rem; margin-bottom: 1rem; word-break: break-all; }
+  /* Contract Address Box */
+  .ca-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 700px;
+    margin: 1rem auto;
+    padding: 1rem 1.5rem;
+    background-color: #0f0;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #0f0;
+  }
+  .ca-box button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background: black;
+    color: #0f0;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+  .ca-box button:hover {
+    background: white;
+    color: black;
+  }
+
+  /* Buy on Raydium button */
+  #buyRaydiumBtn {
+    display: block;
+    margin: 0.5rem auto 2rem auto;
+    padding: 0.7rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 2px solid #0f0;
+    border-radius: 10px;
+    background: black;
+    color: #0f0;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+  #buyRaydiumBtn:hover {
+    background: #0f0;
+    color: black;
+    box-shadow: 0 0 15px #0f0;
+  }
 
   /* Vision Section */
   #vision {
@@ -188,7 +238,14 @@
     <a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
   </div>
 
-  <div class="ca">CA: 94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds</div>
+  <!-- Contract Address Box -->
+  <div class="ca-box">
+    <span id="caText">94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds</span>
+    <button id="copyCA">COPY</button>
+  </div>
+
+  <!-- Buy on Raydium Button -->
+  <a href="https://raydium.io/swap/?inputMint=sol&outputMint=5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump" target="_blank" id="buyRaydiumBtn">BUY ON RAYDIUM</a>
 </section>
 
 <!-- Vision Section -->
@@ -250,6 +307,17 @@
   muteBtn.addEventListener("click", () => {
     video.muted = !video.muted;
     muteBtn.textContent = video.muted ? "🔇" : "🔊";
+  });
+
+  // Copy CA to clipboard
+  const copyBtn = document.getElementById("copyCA");
+  const caText = document.getElementById("caText");
+
+  copyBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(caText.textContent).then(() => {
+      copyBtn.textContent = "COPIED!";
+      setTimeout(() => { copyBtn.textContent = "COPY"; }, 2000);
+    });
   });
 </script>
 
