@@ -286,7 +286,89 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1rem; }
 /* Media Queries */
 @media (max-width: 768px) {
     #homepage h1 { font-size: 3rem; }
-@@ -372,82 +356,79 @@
+    #homepage h2.subtitle { font-size: 1.5rem; }
+    #homepage p.tagline { font-size: 1rem; }
+    .image-boxes img { width: 140px; height: 95px; }
+}
+@media (max-width: 480px) {
+    #homepage h1 { font-size: 2.2rem; }
+    #homepage h2.subtitle { font-size: 1.2rem; }
+    #homepage p.tagline { font-size: 0.9rem; }
+    #introScreen h1 { font-size: 1.5rem; }
+    .vision-box h3 { font-size: 1.2rem; }
+    .vision-box p { font-size: 0.9rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Green Cursor -->
+<div class="cursor-dot" id="cursor"></div>
+
+<!-- Intro Screen -->
+<div id="introScreen">
+    <video id="introVideo" autoplay loop playsinline muted>
+        <source src="intro.mp4" type="video/mp4">
+    </video>
+    <h1>Are you ready to enter a world of pure belief?</h1>
+    <div class="buttons">
+        <button class="yes">ENTER</button>
+        <button class="no">NO</button>
+    </div>
+    <button id="introMuteBtn">🔇 Mute/Unmute</button>
+</div>
+
+<!-- Homepage -->
+<section id="homepage">
+<video class="bg-video" autoplay loop muted playsinline>
+<source src="background1.mp4" type="video/mp4">
+</video>
+<h1>$PBA</h1>
+<h2 class="subtitle">Pure Belief Assets</h2>
+<p class="tagline" id="typewriter"></p>
+<div class="image-boxes">
+<img src="first.jpg" alt="First">
+<img src="second.jpg" alt="Second">
+<img src="third.jpg" alt="Third">
+<img src="fourth.jpg" alt="Fourth">
+</div>
+<div class="links">
+<a href="https://x.com/i/communities/1957015238290579938" target="_blank">X Community</a>
+<a href="https://x.com/PBAOnSol" target="_blank">X Account</a>
+<a href="https://dexscreener.com/solana/94n6v69lfickhbnpfjqqnm754ydwmxsp17iokr87fpds" target="_blank">Chart</a>
+</div>
+<div class="ca-label">Contract Address</div>
+<div class="ca-box">
+<span id="caText">5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump</span>
+<button id="copyCA">COPY</button>
+</div>
+<a href="https://raydium.io/swap/?inputMint=sol&outputMint=5MsYdWEfdSjvzvjzuNwurA9yoimoT2Vp2zt9vaeMpump" target="_blank" id="buyRaydiumBtn">BUY ON RAYDIUM</a>
+</section>
+
+<!-- Vision -->
+<section id="vision">
+<video class="bg-video" autoplay loop muted playsinline>
+<source src="vision.mp4" type="video/mp4">
+</video>
+<h2>The Vision</h2>
+<div class="vision-box">
+    <h3>Beyond Markets</h3>
+    <p>$PBA transcends traditional market dynamics. We're not just an asset – we're a testament to the power of collective belief.</p>
+</div>
+<div class="vision-box">
+    <h3>Pure Conviction</h3>
+    <p>When markets are driven by fear, we stand united in our conviction. Our strength lies in our unwavering belief.</p>
+</div>
+<div class="vision-box">
+    <h3>Community First</h3>
+    <p>Every believer is a cornerstone of our movement. Together, we're building something bigger than ourselves.</p>
+</div>
+<footer>Everything starts with belief...</footer>
+</section>
+
+<!-- Enlarged Image Modal -->
+<div id="enlargedImage">
+<img src="" alt="Enlarged">
 <button id="closeImageBtn">✖</button>
 </div>
 
