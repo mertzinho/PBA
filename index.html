@@ -267,22 +267,6 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1rem; }
     cursor:pointer;
 }
 
-/* Floating Mute Button */
-#muteBtn {
-    position: fixed; top: 15px; right: 15px;
-    width: 45px; height: 45px;
-    border-radius: 50%;
-    background: #0f0;
-    color: black;
-    border: 2px solid #0f0;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 1000;
-    transition: 0.3s;
-}
-#muteBtn:hover { background: black; color: #0f0; box-shadow: 0 0 15px #0f0; }
-
 /* Media Queries */
 @media (max-width: 768px) {
     #homepage h1 { font-size: 3rem; }
@@ -372,9 +356,6 @@ footer { text-align:center; margin-top:1rem; opacity:0.8; font-size:1rem; }
 <button id="closeImageBtn">✖</button>
 </div>
 
-<!-- Floating Mute -->
-<button id="muteBtn">🔇</button>
-
 <script>
 // Typewriter
 const typewriterEl = document.getElementById("typewriter");
@@ -392,14 +373,6 @@ const enlargedImgTag = enlargedImage.querySelector("img");
 const closeImageBtn = document.getElementById("closeImageBtn");
 images.forEach(img => { img.addEventListener("click", ()=>{ enlargedImgTag.src=img.src; enlargedImage.style.display="flex"; }); });
 closeImageBtn.addEventListener("click", ()=>{ enlargedImage.style.display="none"; });
-
-// Mute/Unmute homepage video
-const video = document.querySelector(".bg-video");
-const muteBtn = document.getElementById("muteBtn");
-muteBtn.addEventListener("click", () => {
-    video.muted = !video.muted;
-    muteBtn.textContent = video.muted ? "🔇" : "🔊";
-});
 
 // Copy CA
 document.getElementById("copyCA").addEventListener("click", () => {
@@ -451,3 +424,4 @@ document.addEventListener("click", () => {
 </script>
 </body>
 </html>
+
